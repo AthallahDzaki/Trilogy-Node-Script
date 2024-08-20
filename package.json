@@ -1,0 +1,36 @@
+{
+  "dependencies": {
+    "ora": "^8.0.1",
+    "pure-rand": "^6.1.0",
+    "tiktok-live-connector": "^1.1.9",
+    "ws": "^8.18.0"
+  },
+  "name": "trilogy-node-script",
+  "version": "1.0.0",
+  "description": "Binding For Tiktok and Chaos Mod",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "keywords": [
+    "chaos",
+    "mod",
+    "GTA",
+    "SA",
+    "GTA",
+    "SA",
+    "Chaos"
+  ],
+  "author": "AthallahDzaki",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    "Convert.js": {
+      "default": "./function/convert.js"
+    }
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.11",
+    "memoryjs": "^3.5.1"
+  }
+}
