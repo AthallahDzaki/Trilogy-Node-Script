@@ -72,6 +72,34 @@
         },
         {
             "category": "NPCs",
+            "name": "Recruit Anyone (DE)",
+            "description": "DEGangster",
+            "id": "recruit_anyone_desert_eagle",
+            "exclusive": false
+        },
+        {
+            "category": "NPCs",
+            "name": "Recruit Anyone (SPAS)",
+            "description": "SPASGang",
+            "id": "recruit_anyone_super_shotgun",
+            "exclusive": false
+        },
+        {
+            "category": "NPCs",
+            "name": "Recruit Anyone (Minigun)",
+            "description": "OverPowerGang",
+            "id": "recruit_anyone_minigun",
+            "exclusive": false
+        },
+        {
+            "category": "NPCs",
+            "name": "Recruit Anyone (Spray Tag)",
+            "description": "ValdalismEverywhere",
+            "id": "recruit_anyone_spray",
+            "exclusive": false
+        },
+        {
+            "category": "NPCs",
             "name": "Recruit Anyone (AK-47)",
             "description": "NoOneCanStopUs",
             "id": "recruit_anyone_ak47",
@@ -117,6 +145,27 @@
             "name": "Ninja Theme",
             "description": "NinjaTown",
             "id": "ninja_theme",
+            "exclusive": false
+        },
+        {
+            "category": "WeaponsAndHealth",
+            "name": "Auto Collect Pickup",
+            "description": "AutoCollect.asi",
+            "id": "auto_collect_pickups",
+            "exclusive": false
+        },
+        {
+            "category": "WeaponsAndHealth",
+            "name": "Cough Player",
+            "description": "ICantStopCoughing",
+            "id": "cough_player",
+            "exclusive": false
+        },
+        {
+            "category": "WeaponsAndHealth",
+            "name": "Eveyone Has Covid19",
+            "description": "Covid19",
+            "id": "cough_everyone",
             "exclusive": false
         },
         {
@@ -173,6 +222,76 @@
             "name": "Weapon Set 4",
             "description": "MinigunMadness",
             "id": "weapon_set_4",
+            "exclusive": false
+        },
+        {
+            "category": "WeaponsAndHealth",
+            "name": "Give AK-47",
+            "description": "GiveAK47",
+            "id": "give_ak47",
+            "exclusive": false
+        },
+        {
+            "category": "WeaponsAndHealth",
+            "name": "Give Uzi",
+            "description": "GiveUZI",
+            "id": "give_uzi",
+            "exclusive": false
+        },
+        {
+            "category": "WeaponsAndHealth",
+            "name": "Give Sniper",
+            "description": "GiveSniper",
+            "id": "give_sniper",
+            "exclusive": false
+        },
+        {
+            "category": "WeaponsAndHealth",
+            "name": "Give Shotgun",
+            "description": "GiveShotgun",
+            "id": "give_shotgun",
+            "exclusive": false
+        },
+        {
+            "category": "WeaponsAndHealth",
+            "name": "Give Rocket Launcher",
+            "description": "GiveRocketLauncher",
+            "id": "give_rocket_launcher",
+            "exclusive": false
+        },
+        {
+            "category": "WeaponsAndHealth",
+            "name": "Give Pistol",
+            "description": "GivePistol",
+            "id": "give_pistol",
+            "exclusive": false
+        },
+        {
+            "category": "WeaponsAndHealth",
+            "name": "Give Minigun",
+            "description": "GiveMinigun",
+            "id": "give_minigun",
+            "exclusive": false
+        },
+        {
+            "category": "WeaponsAndHealth",
+            "name": "Give Grenades",
+            "description": "GiveGrenades",
+            "id": "give_grenades",
+            "exclusive": false
+        },
+        {
+            "category": "WeaponsAndHealth",
+            "name": "Give Chainsaw",
+            "description": "GiveChainsaw",
+            "id": "give_chainsaw",
+            "exclusive": false
+        },
+        {
+            "category": "WeaponsAndHealth",
+            "name": "Get Parachute",
+            "description": "GiveParachute",
+            "id": "get_parachute",
             "exclusive": false
         },
         {
@@ -354,17 +473,23 @@
         {
             "category": "Vehicle",
             "name": "OldSpeedDemon",
-            "id": "504"
+            "description": "OldSpeedDemon",
+            "id": "504",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "18Holes",
-            "id": "457"
+            "description": "18Holes",
+            "id": "457",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "ItsAllBull",
-            "id": "486"
+            "description": "ItsAllBull",
+            "id": "486",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
@@ -374,72 +499,100 @@
         {
             "category": "Vehicle",
             "name": "JustTryAndStopMe",
-            "id": "503"
+            "description": "JustTryAndStopMe",
+            "id": "503",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "OhDude",
-            "id": "425"
+            "description": "OhDude",
+            "id": "425",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "JumpJet",
-            "id": "520"
+            "description": "JumpJet",
+            "id": "520",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "MonsterMash",
-            "id": "556"
+            "description": "MonsterMash",
+            "id": "556",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "EnergyFiveHundred",
-            "id": "522"
+            "description": "EnergyFiveHundred",
+            "id": "522",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "FourWheelFun",
-            "id": "471"
+            "description": "FourWheelFun",
+            "id": "471",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "DoughnutHandicap",
-            "id": "489"
+            "description": "DoughnutHandicap",
+            "id": "489",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "SurpriseDriver",
-            "id": "-1"
+            "description": "SurpriseDriver",
+            "id": "-1",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "TimeToKickAss",
-            "id": "432"
+            "description": "TimeToKickAss",
+            "id": "432",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "WheresTheFuneral",
-            "id": "442"
+            "description": "WheresTheFuneral",
+            "id": "442",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "CelebrityStatus",
-            "id": "409"
+            "description": "CelebrityStatus",
+            "id": "409",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "FlyingToStunt",
-            "id": "513"
+            "description": "FlyingToStunt",
+            "id": "513",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "TrueGrime",
-            "id": "408"
+            "description": "TrueGrime",
+            "id": "408",
+            "exclusive": false
         },
         {
             "category": "Vehicle",
             "name": "IWantToHover",
-            "id": "539"
+            "description": "IWantToHover",
+            "id": "539",
+            "exclusive": false
         },
         {
             "category": "Time",
@@ -760,6 +913,13 @@
         },
         {
             "category": "CustomEffects_Generic",
+            "name": "Where is Cop Go?",
+            "description": "WhereIsCopGo",
+            "id": "invisible_cops",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Generic",
             "name": "Invisible Fire",
             "description": "InvisibleFire",
             "id": "invisible_fire",
@@ -800,6 +960,14 @@
             "id": "mirrored_world",
             "exclusive": false
         },
+        {
+            "category": "CustomEffects_Generic",
+            "name": "Draw Distance 0.1 Meter",
+            "description": "LowDrawDistance",
+            "id": "low_draw_distance",
+            "exclusive": false
+        },
+
         {
             "category": "CustomEffects_Generic",
             "name": "Night Vision",
@@ -893,6 +1061,20 @@
         },
         {
             "category": "CustomEffects_Generic",
+            "name": "Did you have a car in your garage?",
+            "description": "DidYouHaveACarInYourGarage",
+            "id": "clear_all_garages",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Generic",
+            "name": "All Garage has Stuck",
+            "description": "AllGarageHasStuck",
+            "id": "lock_all_garages",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Generic",
             "name": "Screensaver HUD",
             "description": "ScreensaverHUD",
             "id": "screensaver_hud",
@@ -977,6 +1159,13 @@
         },
         {
             "category": "CustomEffects_Generic",
+            "name": "I Can't Respray My Car",
+            "description": "ICantResprayMyCar",
+            "id": "disable_pay_n_spray",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Generic",
             "name": "Vehicle Bullets",
             "description": "ImShootingCars",
             "id": "vehicle_bullets",
@@ -994,6 +1183,13 @@
             "name": "Pitch Shifter",
             "description": "VocalRange",
             "id": "pitch_shifter",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Gravity",
+            "name": "Forceful Explosion",
+            "description": "ExplosivePersonality",
+            "id": "forceful_explosions",
             "exclusive": false
         },
         {
@@ -1044,6 +1240,13 @@
             "description": "ImInSpaaaaace",
             "id": "zero_gravity",
             "exclusive": true
+        },
+        {
+            "category": "CustomEffects_Gravity",
+            "name": "Sideway Gravity",
+            "description": "SidewayGravity",
+            "id": "sideway_gravity",
+            "exclusive": false
         },
         {
             "category": "CustomEffects_HUD",
@@ -1191,6 +1394,19 @@
             "description": "HoldTheFUp",
             "id": "hold_the_f_up",
             "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Ped",
+            "name": "Eveyone has Super Damage",
+            "description": "SuperDamageEveryone",
+            "id": "deadly_bullets_quad_dmg_everyone",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Ped",
+            "name": "I have Super Damage",
+            "description": "IHaveSuperPower",
+            "id": "deadly_bullets_quad_dmg_player"
         },
         {
             "category": "CustomEffects_Ped",
@@ -1446,6 +1662,34 @@
         },
         {
             "category": "CustomEffects_NPCs",
+            "name": "Spawn Angry Hobo",
+            "description": "AngryHobo",
+            "id": "spawn_angry_hobo",
+            "exclusive": true
+        },
+        {
+            "category": "CustomEffects_NPCs",
+            "name": "Spawn Crazy Hobo",
+            "description": "CrazyHobo",
+            "id": "spawn_crazy_hobo",
+            "exclusive": true
+        },
+        {
+            "category": "CustomEffects_NPCs",
+            "name": "Spawn Ultra Crazy Hobo",
+            "description": "UltraCrazyHobo",
+            "id": "spawn_ultra_crazy_hobo",
+            "exclusive": true
+        },
+        {
+            "category": "CustomEffects_NPCs",
+            "name": "Spawn Gigachad Hobo",
+            "description": "GigachadHobo",
+            "id": "spawn_gigachad_hobo",
+            "exclusive": true
+        }
+        {
+            "category": "CustomEffects_NPCs",
             "name": "Disarm All NPCs",
             "description": "LeaveTheGunsToMe",
             "id": "disarm_all_npcs",
@@ -1463,6 +1707,13 @@
             "name": "Give NPCs An RPG",
             "description": "RocketParty",
             "id": "give_npcs_an_rpg",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_NPCs",
+            "name": "Give Me Spry can and Fire Extinguisher",
+            "description": "RocketParty",
+            "id": "give_npcs_a_sprcan_fire_ex",
             "exclusive": false
         },
         {
@@ -1700,6 +1951,20 @@
             "name": "Galaxy Note 7",
             "description": "DangerousPhoneCalls",
             "id": "galaxy_note_7",
+            "exclusive": false
+        },
+        {
+            "category": "customEffects_Player",
+            "name": "Busted.....",
+            "description": "PrankBusted",
+            "id": "get_busted_fake",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Player",
+            "name": "Wasted....",
+            "description": "PrankWasted",
+            "id": "get_wasted_fake",
             "exclusive": false
         },
         {
@@ -1984,6 +2249,13 @@
         },
         {
             "category": "CustomEffects_Player",
+            "name": "I Have 2 Weapon in My Hand",
+            "description": "IHave2WeaponInMyHand",
+            "id": "dual_wield_weapons",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Player",
             "name": "Weapon Recoil",
             "description": "ThoseAreSomeStrongWeapons",
             "id": "weapon_recoil",
@@ -2044,6 +2316,20 @@
             "description": "SmoothCriminal",
             "id": "fps_60",
             "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Vehicle",
+            "name": "Why All Vehicle Lose their Door?",
+            "description": "WhyAllVehicleLoseTheirDoor",
+            "id": "car_is_broken",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Vehicle",
+            "name": "Mechanic Forget to Install my Wheel",
+            "description": "MechanicForgetToInstallMyWheel",
+            "id": "oh_no_my_wheel",
+            "exclusive": true
         },
         {
             "category": "CustomEffects_Vehicle",
@@ -2355,6 +2641,13 @@
         },
         {
             "category": "CustomEffects_Vehicle",
+            "name": "Oil Everywhere",
+            "description": "OilEverywhere",
+            "id": "oil_on_roads",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Vehicle",
             "name": "Wide Vehicles",
             "description": "WidePeepoHappy",
             "id": "vehicle_size_wide",
@@ -2372,6 +2665,13 @@
             "name": "Zero Suspension Damping",
             "description": "LowrideAllNight",
             "id": "zero_suspension_damping",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Wanted",
+            "name": "Object.freeze(WantedLevel)",
+            "description": "FreezeWanted",
+            "id": "freeze_wanted_level",
             "exclusive": false
         },
         {
@@ -2403,9 +2703,17 @@
             "exclusive": false
         },
         {
+            "category": "CustomEffects_Weather",
+            "name": "Kinda Spooky...",
+            "description": "SpookyWeather",
+            "id": "mist",
+            "exclusive": false
+        },
+        {
             "category": "Teleportation",
             "name": "Fake Teleport",
-            "description": "HahaGotYourNose"
+            "description": "HahaGotYourNose",
+            "exclusive": true
         },
         {
             "category": "Teleportation",
