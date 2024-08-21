@@ -1,4 +1,4 @@
-import memoryjs from "memoryjs";
+// import memoryjs from "memoryjs";
 import ora from "ora";
 
 import { WebSocketServer } from "ws";
@@ -7,7 +7,7 @@ import { argv, exit } from "process";
 import { readFileSync, writeFileSync } from "fs";
 import { xoroshiro128plus } from "pure-rand";
 
-import { DebugMemory } from "./function/memory.js";
+// import { DebugMemory } from "./function/memory.js";
 import {
     GenerateRandom,
     GenerateSeed,
@@ -45,10 +45,10 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
         exit(); // Exit the process
     }
 
-    if (GeneralConfig.Debug.MemoryDebug) {
-        DebugMemory();
-        return; // We Skip Entire Script
-    }
+//    if (GeneralConfig.Debug.MemoryDebug) {
+//        DebugMemory();
+//        return; // We Skip Entire Script
+//    }
 
     userSeed = GeneralConfig.General.Seed || GenerateSeed();
     console.log(`Seed: ${userSeed}`);
@@ -74,40 +74,7 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
         if (loadingDone == false) {
             loading.succeed("GTA SA Found!");
             loadingDone = true;
-        }
-
-        if(!GeneralConfig.Memory.EnableMemoryCheck) {
-            console.log("Memory Check Disabled");
-            console.log("We Recomend to enable it to prevent crashes.");
-            gameProcessDetected = true;
-            break;
-        }
-
-        if (!process && GeneralConfig.Memory.EnableMemoryCheck) {
-            process = memoryjs.openProcess("gta_sa.exe");
-            await sleep(1000);
-            continue;
-        }
-
-        if (
-            memoryjs.readMemory(process.handle, 0xC8D4C0, "int32") != 9 &&
-            GeneralConfig.Memory.EnableMemoryCheck &&
-            !gameProcessDetected
-        ) {
-            loading.start(
-                "Game is not in the correct state. Please start the game and load a savegame."
-            );
-            await sleep(1000);
-            continue;
-        }
-        else if (
-            memoryjs.readMemory(process.handle, 0xC8D4C0, "int32") == 9 &&
-            GeneralConfig.Memory.EnableMemoryCheck &&
-            !gameProcessDetected
-        ) {
-            loading.succeed("Game is in the correct state");
-            gameProcessDetected = true;
-            break;
+	    break;
         }
     }
 
