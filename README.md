@@ -2,6 +2,8 @@
   GTA SA Chaos Mod with Tiktok Integration
 </h1>
 
+FOR BEST PERFORMANCE, USE [My Port Chaos Mod](https://github.com/AthallahDzaki/Trilogy-ASI-Script/releases)
+
 <h2>
 Getting Started (Memory Mode)
 </h2>
