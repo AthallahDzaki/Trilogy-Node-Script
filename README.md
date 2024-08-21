@@ -66,7 +66,7 @@ node index.js
     },
 
     "Memory": {
-        "EnableMemoryCheck": true // Memory Check, available for King branch (Memory Mode)
+        "EnableMemoryCheck": true // Memory Check, available for Memory branch (Memory Mode)
     },
 
     "Debug": {
