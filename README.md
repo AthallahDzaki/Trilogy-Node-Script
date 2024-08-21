@@ -29,3 +29,50 @@ Tiktok Configuration will added in bottom section
 ```
 node index.js
 ```
+
+## Configuration
+```
+{
+    "General": { // General Config (Relate to Chaos Mod Config)
+        "GUIWebsocketPort": 42069,
+        "Cooldown": 30000,
+        "EffectDuration": 30000,
+        "Seed": ""
+    },
+
+    "RapidFire" :{ // Rapid Fire
+        "RapidFireEnable": true, 
+        "RapidFireEffectDuration" : 15000 // Duration for All Effect from rapid fire
+    },
+
+    "Tiktok": {
+        "TiktokEnable": true, // Enable Tiktok
+        "Tikfinity": false, // Integrate with Tikfinity (Tiktok Username can be empty)
+        "TiktokUsername": "@tiktok", // Tiktok Live Username
+        "TiktokVoteEnable": true, // Enable Vote
+        "TiktokVoteCooldown" : 30000, // Vote Cooldown (After Vote)
+        "TiktokForceEffect": false, // Force Effect, Effect can be specific at gifts.json
+        "TiktokSessionId" : "" // See Bottom Note! (Unused when Tikfinity enable)
+    },
+
+    "EffectForceEffect" : {
+        "ForceSpecificEffect" : false, // Force Specific Effect to Run
+        "EffectName" : "spawn_ultra_crazy_hobo" // Spawn Ultra Crazy Hobo
+    },
+
+    "EffectForceCategory": {
+        "ForceSpecificCategory": false, // Force Specific Effect from choosen category
+        "CategoryName": "" // ...
+    },
+
+    "Memory": {
+        "EnableMemoryCheck": true // Memory Check, available for King branch (Memory Mode)
+    },
+
+    "Debug": {
+        "MemoryDebug": false // Debugging (Dev Only)
+    }
+}
+```
+
+To get the Session ID from your account, open TikTok in your web browser and make sure you are logged in, then press F12 to open the developer tools. Switch to the Application tab and select Cookies on the left side. Then take the value of the cookie with the name sessionid.
