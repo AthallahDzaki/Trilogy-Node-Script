@@ -4,10 +4,13 @@
 
 FOR BEST PERFORMANCE, USE [My Port Chaos Mod](https://github.com/AthallahDzaki/Trilogy-ASI-Script/releases)
 
+There is 2 Mode, Memory and Normal. if You prefer use Normal mode change to branch [normal](/tree/normal).
+
+The only difference is in the game memory checking system so that it does not send packets when in the initial menu.
+
 <h2>
 Getting Started (Memory Mode)
 </h2>
-There is 2 Mode, Memory and Normal. if You prefer use Normal mode change to branch normal
 
 1. Prerequire
 - [Node GYP](https://github.com/nodejs/node-gyp)
