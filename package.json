@@ -30,6 +30,7 @@
     }
   },
   "devDependencies": {
-    "@types/ws": "^8.5.11"
+    "@types/ws": "^8.5.11",
+    "memoryjs": "^3.5.1"
   }
 }
