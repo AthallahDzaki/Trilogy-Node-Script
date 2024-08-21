@@ -4,7 +4,7 @@
 
 FOR BEST PERFORMANCE, USE [My Port Chaos Mod](https://github.com/AthallahDzaki/Trilogy-ASI-Script/releases)
 
-There is 2 Mode, Memory and Normal. if You prefer use Normal mode change to branch [normal](https://github.com/AthallahDzaki/Trilogy-Node-Script/tree/king)
+There is 2 Mode, Memory and Normal. if You prefer use Normal mode change to branch [normal](https://github.com/AthallahDzaki/Trilogy-Node-Script/tree/normal)
 
 The only difference is in the game memory checking system so that it does not send packets when in the initial menu.
 
