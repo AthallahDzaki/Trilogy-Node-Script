@@ -62,9 +62,6 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
     loading.spinner.interval = 100;
     loading.start();
 
-    let process = null,
-        gameProcessDetected = false;
-
     while (true) {
         if (!findRunningProcess("gta_sa.exe")) {
             await sleep(1000);
@@ -74,7 +71,7 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
         if (loadingDone == false) {
             loading.succeed("GTA SA Found!");
             loadingDone = true;
-	    break;
+	        break;
         }
     }
 
