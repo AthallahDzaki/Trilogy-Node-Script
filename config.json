@@ -13,6 +13,7 @@
 
     "Tiktok": {
         "TiktokEnable": true,
+        "TikfinityEnable": true,
         "TiktokUsername": "@tiktok",
         "TiktokVoteEnable": true,
         "TiktokVoteCooldown" : 30000,

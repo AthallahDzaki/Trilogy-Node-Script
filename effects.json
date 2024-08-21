@@ -1687,7 +1687,7 @@
             "description": "GigachadHobo",
             "id": "spawn_gigachad_hobo",
             "exclusive": true
-        }
+        },
         {
             "category": "CustomEffects_NPCs",
             "name": "Disarm All NPCs",

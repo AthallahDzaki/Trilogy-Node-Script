@@ -1,4 +1,5 @@
 import { WebcastPushConnection } from "tiktok-live-connector";
+import { WebSocket } from "ws";
 import { SendTheEffect, GenerateRandom } from "./random.js";
 import { eVotingMode, ePickedVote, GeneralConfig } from "../shared/shared.js";
 import fs from "fs";
@@ -27,16 +28,20 @@ class TikTokHandler {
         this.rapidFireHandler = rapidFireHandler;
         this.userSeed = userSeed;
         this.rngInstance = rngInstance;
-        this.tiktokConnection = new WebcastPushConnection(
-            internal_Config.TiktokUsername,
-            {
-                sessionId: internal_Config.TiktokSessionId || null,
-            }
-        );
+        if (internal_Config.TikfinityEnable) {
+            this.tiktokConnection = WebSocket("ws://localhost:21213/");
+        } else {
+            this.tiktokConnection = new WebcastPushConnection(
+                internal_Config.TiktokUsername,
+                {
+                    sessionId: internal_Config.TiktokSessionId || null,
+                }
+            );
+        }
     }
 
     internal_ValidateData() {
-        if (internal_Config.TiktokUsername == "") {
+        if (internal_Config.TiktokUsername == "" && !internal_Config.TikfinityEnable) {
             console.log(
                 "Tiktok Username is not set. Please set it in the config.json file."
             );
@@ -52,10 +57,9 @@ class TikTokHandler {
 
             internal_theGift.forEach((gift) => {
                 if (gift.run_effect == "") return;
+                let effects = JSON.parse(this.effectDataBase)["Function"];
                 if (
-                    !this.effectDataBase.includes(
-                        `"name": "${gift.run_effect}"`
-                    )
+                    effects.find((x) => x.description == gift.run_effect) == undefined
                 ) {
                     console.log(`Effect not found for gift: ${gift.name}`);
                     exit();
@@ -255,24 +259,46 @@ class TikTokHandler {
     }
 
     SetupTiktok() {
-        this.tiktokConnection
-            .connect()
-
-            .then((state) => {
-                console.info(`Connected to roomId ${state.roomId}`);
-            })
-            .catch((err) => {
-                console.error("Failed to connect", err);
+        this.internal_ValidateData();
+        if (internal_Config.TikfinityEnable) {
+            this.tiktokConnection.on("open", () => {
+                console.log("Connected to Tikfinity");
             });
 
-        this.tiktokConnection.on("chat", (data) => {
-            let message = data.comment;
-            this.onMessage(message);
-        });
+            this.tiktokConnection.on("message", (data) => {
+                data = JSON.parse(data);
+                // {
+                //     "event": "chat",
+                //     "data": { }
+                // }
+                if(data.event == "chat") {
+                    let message = data.data.comment;
+                    this.onMessage(message);
+                }
+                else if(data.event == "gift") {
+                    this.onGift(data.data);
+                }
+            });
+        } else {
+            this.tiktokConnection
+                .connect()
 
-        this.tiktokConnection.on("gift", (data) => {
-            this.onGift(data);
-        });
+                .then((state) => {
+                    console.info(`Connected to roomId ${state.roomId}`);
+                })
+                .catch((err) => {
+                    console.error("Failed to connect", err);
+                });
+
+            this.tiktokConnection.on("chat", (data) => {
+                let message = data.comment;
+                this.onMessage(message);
+            });
+
+            this.tiktokConnection.on("gift", (data) => {
+                this.onGift(data);
+            });
+        }
     }
 }
 
