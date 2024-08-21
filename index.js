@@ -123,12 +123,6 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
         }
         else {
             if (remaining <= 0) {
-                // if (RapidFireRemaining > 0) {
-                //     remaining = RapidFireCooldown;
-                //     RapidFireRemaining--;
-                // } else {
-                //     remaining = cooldown;
-                // }
                 remaining = cooldown;
                 let effect = GenerateRandom(
                     effectDataBase,
