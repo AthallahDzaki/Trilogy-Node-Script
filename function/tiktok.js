@@ -1,5 +1,6 @@
 import { WebcastPushConnection } from "tiktok-live-connector";
 import { WebSocket } from "ws";
+import { exit } from "process";
 import { SendTheEffect, GenerateRandom } from "./random.js";
 import { eVotingMode, ePickedVote, GeneralConfig } from "../shared/shared.js";
 import fs from "fs";
