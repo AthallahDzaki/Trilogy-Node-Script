@@ -57,6 +57,8 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
                 }
             })
         }
+    }).catch((error) => {
+        console.log("[ERROR] Failed to get the effects.json from the repository");
     })
 
     let effectDataBase = readFileSync("./effects.json", "utf8");
