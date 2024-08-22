@@ -7,6 +7,10 @@ import { argv, exit } from "process";
 import { readFileSync, writeFileSync } from "fs";
 import { xoroshiro128plus } from "pure-rand";
 
+import axios from "axios";
+
+import * as readline from "readline/promises";
+
 // import { DebugMemory } from "./function/memory.js";
 import {
     GenerateRandom,
@@ -44,22 +48,22 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
         exit(); // Exit the process
     }
 
-    axios.get("https://raw.githubusercontent.com/AthallahDzaki/Trilogy-Node-Script/normal/effects.json").then((response) => {
-        if(JSON.parse(response.data) != JSON.parse(readFileSync("./effects.json", "utf8"))) { 
-            console.log("[INFO] New Effects, has been added");
-            prompt("Do you want to update the effects.json? (y/n): ", (answer) => {
-                if(answer == "y") {
-                    writeFileSync("./effects.json", JSON.stringify(JSON.parse(response.data), null, 4), "utf8");
-                    console.log("[INFO] Effects.json has been updated");
-                }
-                else {
-                    console.log("[INFO] Effects.json has not been updated");
-                }
-            })
+    let effect = await axios.get("https://raw.githubusercontent.com/AthallahDzaki/Trilogy-Node-Script/normal/effects.json")
+    if(effect.data != JSON.parse(readFileSync("./effects.json", "utf8"))) {
+        let rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout,
+        });
+        let ans = await rl.question("New Effects Detected, Do you want to update it? (Y/N): ");
+        if(ans.toLowerCase() == "y") {
+            writeFileSync("./effects.json", JSON.stringify(effect.data, null, 4), "utf8");
+            console.log("Effects Updated!");
+        } else {
+            console.log("Effects Not Updated!");
         }
-    }).catch((error) => {
-        console.log("[ERROR] Failed to get the effects.json from the repository");
-    })
+        rl.close();
+
+    }
 
     let effectDataBase = readFileSync("./effects.json", "utf8");
     
