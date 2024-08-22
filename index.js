@@ -26,7 +26,6 @@ let wsServer = new WebSocketServer({ port: GeneralConfig.General.WebSocketGUIPor
 
 console.log("Server Started!");
 
-let effectDataBase = readFileSync("./effects.json", "utf8");
 
 let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
 
@@ -44,6 +43,25 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
         } else console.log("Failed to convert!");
         exit(); // Exit the process
     }
+
+    axios.get("https://raw.githubusercontent.com/AthallahDzaki/Trilogy-Node-Script/normal/effects.json").then((response) => {
+        if(JSON.parse(response.data) != JSON.parse(readFileSync("./effects.json", "utf8"))) { 
+            console.log("[INFO] New Effects, has been added");
+            prompt("Do you want to update the effects.json? (y/n): ", (answer) => {
+                if(answer == "y") {
+                    writeFileSync("./effects.json", JSON.stringify(JSON.parse(response.data), null, 4), "utf8");
+                    console.log("[INFO] Effects.json has been updated");
+                }
+                else {
+                    console.log("[INFO] Effects.json has not been updated");
+                }
+            })
+        }
+    }).catch((error) => {
+        console.log("[ERROR] Failed to get the effects.json from the repository");
+    })
+
+    let effectDataBase = readFileSync("./effects.json", "utf8");
 
     if (GeneralConfig.Debug.MemoryDebug) {
         DebugMemory();
