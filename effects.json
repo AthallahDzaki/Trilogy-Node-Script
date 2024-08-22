@@ -1689,6 +1689,20 @@
             "exclusive": true
         },
         {
+            "category" : "CustomEffects_NPCs",
+            "name" : "Move All Angry Hobo to Player",
+            "description" : "AngryHoboToPlayer",
+            "id" : "move_angry_hobo_to_player",
+            "exclusive" : true
+        },
+        {
+            "category": "CustomEffects_NPCs",
+            "name": "Move All Angry Hobo to Random Location",
+            "description": "AngryHoboToRandomLocation",
+            "id": "move_angry_hobo_to_random",
+            "exclusive": true
+        },
+        {
             "category": "CustomEffects_NPCs",
             "name": "Disarm All NPCs",
             "description": "LeaveTheGunsToMe",
