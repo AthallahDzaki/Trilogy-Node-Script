@@ -1,7 +1,7 @@
 {
     "General": {
         "GUIWebsocketPort": 42069,
-        "Cooldown": 30000,
+        "Cooldown": 5000,
         "EffectDuration": 30000,
         "Seed": ""
     },
@@ -12,7 +12,7 @@
     },
 
     "Tiktok": {
-        "TiktokEnable": true,
+        "TiktokEnable": false,
         "TikfinityEnable": true,
         "TiktokUsername": "@tiktok",
         "TiktokVoteEnable": true,
@@ -22,8 +22,8 @@
     },
 
     "EffectForceEffect" : {
-        "ForceSpecificEffect" : false,
-        "EffectName" : "spawn_ultra_crazy_hobo"
+        "ForceSpecificEffect" : true,
+        "EffectName" : "move_all_angry_hobo_to_you"
     },
 
     "EffectForceCategory": {

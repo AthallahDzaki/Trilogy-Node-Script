@@ -2,3 +2,4 @@ node_modules
 package-lock.json
 wstake.js
 a.js
+config.json
