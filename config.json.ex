@@ -1,7 +1,7 @@
 {
     "General": {
         "GUIWebsocketPort": 42069,
-        "Cooldown": 5000,
+        "Cooldown": 30000,
         "EffectDuration": 30000,
         "Seed": ""
     },

@@ -17,18 +17,17 @@ The only difference is in the game memory checking system so that it does not se
 ```
 npm i
 ```
+3. Rename config.json.ex to config.json
 
-3. Modify config.json
-Tiktok Configuration will added in bottom section
+4. Modify config.json
+*Tiktok Configuration will added in bottom section*
 
-4. Start Your GTA SA Until Game Fully Loaded
+5. Start Your GTA SA Until Game Fully Loaded
 
-5. Run
+6. Run
 ```
 node index.js
 ```
-
-5. NodeJS will detect your game state and send Websocket if Game Loaded Properly
 
 ## Configuration
 ```
@@ -75,4 +74,5 @@ node index.js
 }
 ```
 
+Note: (Only for Non Tikfinity)
 To get the Session ID from your account, open TikTok in your web browser and make sure you are logged in, then press F12 to open the developer tools. Switch to the Application tab and select Cookies on the left side. Then take the value of the cookie with the name sessionid.
