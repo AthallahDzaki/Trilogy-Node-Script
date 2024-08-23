@@ -30,7 +30,7 @@ class TikTokHandler {
         this.userSeed = userSeed;
         this.rngInstance = rngInstance;
         if (internal_Config.TikfinityEnable) {
-            this.tiktokConnection = WebSocket("ws://localhost:21213/");
+            this.tiktokConnection = new  WebSocket("ws://localhost:21213/");
         } else {
             this.tiktokConnection = new WebcastPushConnection(
                 internal_Config.TiktokUsername,
