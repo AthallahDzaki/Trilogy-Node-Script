@@ -87,16 +87,11 @@ class TikTokHandler {
         switch (this.voteMode) {
             case eVotingMode.COOLDOWN: {
                 if (this.voteEffect.length < this.voteMaxLength) {
-                    // let theEffect = GenerateRandom(
-                    //     this.effectDataBase,
-                    //     this.rngInstance
-                    // );
-                    let theEffect = {
-                        category: "RapidFire",
-                        name: "Rapid-Fire",
-                        description: "SystemOverload",
-                        id: "effect_rapid_fire",
-                    };
+                     let theEffect = GenerateRandom(
+                         this.effectDataBase,
+                         this.rngInstance
+                    );
+                    
                     this.voteEffect.push(theEffect);
                 }
 
