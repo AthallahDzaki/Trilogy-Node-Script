@@ -12,6 +12,7 @@ class TikTokHandler {
     voteMode = eVotingMode.COOLDOWN;
     votePicked = ePickedVote.UNDETERMINED;
     votePicker = [0, 0, 0];
+    votePickerUID = [];
     voteCooldown = internal_Config.TiktokVoteCooldown;
     voteRemaining = internal_Config.TiktokVoteCooldown;
     voteEffect = [];
@@ -84,6 +85,7 @@ class TikTokHandler {
     }
 
     HandleTheTimer() {
+        if(!GeneralConfig.Tiktok.TiktokVoteEnable) return;  // Skip if the vote is disabled
         switch (this.voteMode) {
             case eVotingMode.COOLDOWN: {
                 if (this.voteEffect.length < this.voteMaxLength) {
@@ -106,9 +108,6 @@ class TikTokHandler {
                     let highestVote = Math.max(...this.votePicker);
                     let highestIndex = this.votePicker.indexOf(highestVote);
                     let pickedEffect = this.voteEffect[highestIndex];
-
-                    console.log(pickedEffect.id);
-                    console.log(GeneralConfig.RapidFire.RapidFireEnable);
 
                     if (
                         pickedEffect.id.includes("rapid_fire") &&
@@ -159,6 +158,7 @@ class TikTokHandler {
                     this.voteRemaining = this.voteCooldown;
                     this.votePicked = ePickedVote.UNDETERMINED;
                     this.votePicker = [0, 0, 0];
+                    this.VotePickerUID = [];
                     this.voteEffect = [];
                 } else {
                     this.wsServer.clients.forEach((clients) => {
@@ -166,7 +166,7 @@ class TikTokHandler {
                             JSON.stringify({
                                 type: "votes",
                                 data: {
-                                    effects: ["???", "???", "???"],
+                                    effects: voteEffect,
                                     votes: this.votePicker,
                                     pickedChoice: ePickedVote.UNDETERMINED,
                                 },
@@ -207,22 +207,26 @@ class TikTokHandler {
         });
     }
 
-    onMessage(message) {
+    onMessage(data) {
         switch (this.voteMode) {
             case eVotingMode.VOTING: {
-                switch (message) {
+                if(this.votePickerUID.includes(data.uniqueId)) return;
+                switch (data.message) {
                     case "#1": {
                         this.votePicker[0]++;
+                        this.votePickerUID.push(data.uniqueId);
                         this.votePicked |= ePickedVote.FIRST;
                         break;
                     }
                     case "#2": {
                         this.votePicker[1]++;
+                        this.votePickerUID.push(data.uniqueId);
                         this.votePicked |= ePickedVote.SECOND;
                         break;
                     }
                     case "#3": {
                         this.votePicker[2]++;
+                        this.votePickerUID.push(data.uniqueId);
                         this.votePicked |= ePickedVote.THIRD;
                         break;
                     }
@@ -230,7 +234,7 @@ class TikTokHandler {
                 break;
             }
             case eVotingMode.RAPID_FIRE: {
-                this.rapidFireHandler.addEffectByName(message, data.uniqueId);
+                this.rapidFireHandler.addEffectByName(data.message, data.uniqueId);
                 break;
             }
         }
@@ -238,9 +242,11 @@ class TikTokHandler {
 
     onGift(data) {
         let gift = internal_theGift.find((x) => x.id == data.giftId);
-        if (gift.run_effect) {
+        if (gift == undefined) return; // We skip the gift if not found
+        if (gift.run_effect != "") {
             let effects = JSON.parse(this.effectDataBase)["Function"];
-            let findEffect = effects.find((x) => x.name == gift.run_effect);
+            let findEffect = effects.find((x) => x.description == gift.run_effect);
+            if (findEffect == undefined) return;
             if (findEffect.exclusive && data.repeatEnd == false) return; // We Skip Exclusive Effects (Avoid Crash)
             this.wsServer.clients.forEach((clients) => {
                 findEffect.id = "effect_" + findEffect.id;
@@ -262,17 +268,12 @@ class TikTokHandler {
             });
 
             this.tiktokConnection.on("message", (data) => {
-                data = JSON.parse(data);
-                // {
-                //     "event": "chat",
-                //     "data": { }
-                // }
-                if(data.event == "chat") {
-                    let message = data.data.comment;
-                    this.onMessage(message);
+                let wsData = JSON.parse(data);
+                if(wsData.event == "chat") {
+                    this.onMessage(wsData.data);
                 }
-                else if(data.event == "gift") {
-                    this.onGift(data.data);
+                else if(wsData.event == "gift") {
+                    this.onGift(wsData.data);
                 }
             });
         } else {
@@ -287,8 +288,7 @@ class TikTokHandler {
                 });
 
             this.tiktokConnection.on("chat", (data) => {
-                let message = data.comment;
-                this.onMessage(message);
+                this.onMessage(data);
             });
 
             this.tiktokConnection.on("gift", (data) => {

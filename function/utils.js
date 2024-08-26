@@ -13,3 +13,9 @@ export function findRunningProcess(processName) {
         return false;
     }
 }
+
+export const getDifference = (s, t) => {
+    s = [...s].sort();
+    t = [...t].sort();
+    return t.find((char, i) => char !== s[i]);
+  };

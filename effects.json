@@ -967,7 +967,6 @@
             "id": "low_draw_distance",
             "exclusive": false
         },
-
         {
             "category": "CustomEffects_Generic",
             "name": "Night Vision",
@@ -1689,11 +1688,11 @@
             "exclusive": true
         },
         {
-            "category" : "CustomEffects_NPCs",
-            "name" : "Move All Angry Hobo to Player",
-            "description" : "AngryHoboToPlayer",
-            "id" : "move_angry_hobo_to_player",
-            "exclusive" : true
+            "category": "CustomEffects_NPCs",
+            "name": "Move All Angry Hobo to Player",
+            "description": "AngryHoboToPlayer",
+            "id": "move_angry_hobo_to_player",
+            "exclusive": true
         },
         {
             "category": "CustomEffects_NPCs",

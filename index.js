@@ -6,6 +6,7 @@ import { Convert } from "./function/convert.js";
 import { argv, exit } from "process";
 import { readFileSync, writeFileSync } from "fs";
 import { xoroshiro128plus } from "pure-rand";
+import * as Diff from 'diff';
 
 import axios from "axios";
 
@@ -48,8 +49,15 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
         exit(); // Exit the process
     }
 
+    let effectDB = JSON.parse(readFileSync("./effects.json", "utf8"));
+
     let effect = await axios.get("https://raw.githubusercontent.com/AthallahDzaki/Trilogy-Node-Script/normal/effects.json")
-    if(effect.data != JSON.parse(readFileSync("./effects.json", "utf8"))) {
+    let dataJSON = JSON.parse(JSON.stringify(effect.data, null, 4));
+    let diff = Diff.diffJson(dataJSON, effectDB), diffCount = 0;
+    diff.forEach((part) => {
+        if(part.added || part.removed) diffCount++;
+    });
+    if(diffCount > 0) {
         let rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout,
@@ -62,7 +70,6 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
             console.log("Effects Not Updated!");
         }
         rl.close();
-
     }
 
     let effectDataBase = readFileSync("./effects.json", "utf8");
@@ -104,7 +111,7 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
     }
 
     setInterval(async () => {
-        if(GeneralConfig.Tiktok.TiktokEnable && GeneralConfig.Tiktok.TiktokVoteEnable) {
+        if(GeneralConfig.Tiktok.TiktokEnable) {
             TiktokHandler.HandleTheTimer();
         }
         else {
