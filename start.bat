@@ -1,14 +1,16 @@
 @echo off
 
+set GIT_FOUND=0
+
 where git > nul 2>&1 || (
-    call git pull
-) else (
+    set GIT_FOUND=1
+    git pull
+)
+IF GIT_FOUND==0 (
     echo "Git not found, you can manually download the latest version from https://github.com/AthallahDzaki/Trilogy-Node-Script/releases"
 )
 
-IF NOT EXIST node_modules (
-    call npm install
-)
+call npm install
 
 if NOT EXIST config.json (
     REN config.json.ex config.json
