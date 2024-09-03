@@ -1,10 +1,17 @@
 @echo off
 
-set GIT_FOUND=0
+SET GIT_FOUND=0
 
 where git > nul 2>&1 || (
-    set GIT_FOUND=1
-    git pull
+    IF EXIST .git (
+        SET GIT_FOUND=1
+        git pull
+    ) ELSE (
+        SET GIT_FOUND=1
+        git init
+        git remote add origin https://github.com/AthallahDzaki/Trilogy-Node-Script
+        git pull
+    )
 )
 IF GIT_FOUND==0 (
     echo "Git not found, you can manually download the latest version from https://github.com/AthallahDzaki/Trilogy-Node-Script/releases"

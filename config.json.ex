@@ -14,6 +14,8 @@
     "Tiktok": {
         "TiktokEnable": false,
         "TikfinityEnable": true,
+        "TikfinityHTTPServer": true,
+        "TiktokUseBuiltInChaos" : false,
         "TiktokUsername": "@tiktok",
         "TiktokVoteEnable": true,
         "TiktokVoteCooldown" : 30000,
@@ -22,8 +24,8 @@
     },
 
     "EffectForceEffect" : {
-        "ForceSpecificEffect" : true,
-        "EffectName" : "move_all_angry_hobo_to_you"
+        "ForceSpecificEffect" : false,
+        "EffectName" : "spawn_ultra_crazy_hobo"
     },
 
     "EffectForceCategory": {

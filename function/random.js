@@ -444,7 +444,7 @@ export function GenerateRandom(
     // Then We Take The Name
     let name =
         effect.category == "Vehicle"
-            ? "Spawn " + vehicleName[effect.id - 400]
+            ? "Spawn " + effect.id == -1 ? "Random Vehicle" : vehicleName[effect.id - 400]
             : effect.category == "Teleportation"
             ? "Teleport To " + effect.name
             : effect.name;
@@ -467,9 +467,8 @@ export function GenerateRandom(
     };
     if (ret == {})
         throw new Error(
-            `No Location Provided\nRandomNess : ${num}\nEffectList : ${effectList}`
+            `No Return Provided\nRandomNess : ${num}\nEffectList : ${effectList}`
         );
-    console.log(ret);
     return ret;
 }
 
@@ -524,6 +523,9 @@ export function SendTheEffect(effect, userSeed, rngInstance) {
     let data = {};
     switch (effect.category) {
         case "Vehicle": {
+            if (effect.id == -1) {
+                effect.id = GenerateRandomVehicle(rngInstance);
+            }
             data = {
                 type: "effect",
                 data: {

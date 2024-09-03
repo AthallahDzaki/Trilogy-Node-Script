@@ -12,7 +12,8 @@ class TikTokHandler {
     voteMode = eVotingMode.COOLDOWN;
     votePicked = ePickedVote.UNDETERMINED;
     votePicker = [0, 0, 0];
-    votePickerUID = [];
+    votePickerUID = []; // From Chat (+1)
+    votePickerExclusiveUID = []; // From Gift (+5)
     voteCooldown = internal_Config.TiktokVoteCooldown;
     voteRemaining = internal_Config.TiktokVoteCooldown;
     voteEffect = [];
@@ -31,7 +32,7 @@ class TikTokHandler {
         this.userSeed = userSeed;
         this.rngInstance = rngInstance;
         if (internal_Config.TikfinityEnable) {
-            this.tiktokConnection = new  WebSocket("ws://localhost:21213/");
+            this.tiktokConnection = new WebSocket("ws://localhost:21213/");
         } else {
             this.tiktokConnection = new WebcastPushConnection(
                 internal_Config.TiktokUsername,
@@ -43,7 +44,10 @@ class TikTokHandler {
     }
 
     internal_ValidateData() {
-        if (internal_Config.TiktokUsername == "" && !internal_Config.TikfinityEnable) {
+        if (
+            internal_Config.TiktokUsername == "" &&
+            !internal_Config.TikfinityEnable
+        ) {
             console.log(
                 "Tiktok Username is not set. Please set it in the config.json file."
             );
@@ -61,7 +65,8 @@ class TikTokHandler {
                 if (gift.run_effect == "") return;
                 let effects = JSON.parse(this.effectDataBase)["Function"];
                 if (
-                    effects.find((x) => x.description == gift.run_effect) == undefined
+                    effects.find((x) => x.description == gift.run_effect) ==
+                    undefined
                 ) {
                     console.log(`Effect not found for gift: ${gift.name}`);
                     exit();
@@ -85,15 +90,15 @@ class TikTokHandler {
     }
 
     HandleTheTimer() {
-        if(!GeneralConfig.Tiktok.TiktokVoteEnable) return;  // Skip if the vote is disabled
+        if (!GeneralConfig.Tiktok.TiktokVoteEnable) return; // Skip if the vote is disabled
         switch (this.voteMode) {
             case eVotingMode.COOLDOWN: {
                 if (this.voteEffect.length < this.voteMaxLength) {
-                     let theEffect = GenerateRandom(
-                         this.effectDataBase,
-                         this.rngInstance
+                    let theEffect = GenerateRandom(
+                        this.effectDataBase,
+                        this.rngInstance
                     );
-                    
+
                     this.voteEffect.push(theEffect);
                 }
 
@@ -210,7 +215,7 @@ class TikTokHandler {
     onMessage(data) {
         switch (this.voteMode) {
             case eVotingMode.VOTING: {
-                if(this.votePickerUID.includes(data.uniqueId)) return;
+                if (this.votePickerUID.includes(data.uniqueId)) return;
                 switch (data.message) {
                     case "#1": {
                         this.votePicker[0]++;
@@ -234,29 +239,59 @@ class TikTokHandler {
                 break;
             }
             case eVotingMode.RAPID_FIRE: {
-                this.rapidFireHandler.addEffectByName(data.message, data.uniqueId);
+                this.rapidFireHandler.addEffectByName(
+                    data.message,
+                    data.uniqueId
+                );
                 break;
             }
         }
     }
 
     onGift(data) {
-        let gift = internal_theGift.find((x) => x.id == data.giftId);
-        if (gift == undefined) return; // We skip the gift if not found
-        if (gift.run_effect != "") {
-            let effects = JSON.parse(this.effectDataBase)["Function"];
-            let findEffect = effects.find((x) => x.description == gift.run_effect);
-            if (findEffect == undefined) return;
-            if (findEffect.exclusive && data.repeatEnd == false) return; // We Skip Exclusive Effects (Avoid Crash)
-            this.wsServer.clients.forEach((clients) => {
-                findEffect.id = "effect_" + findEffect.id;
-                let data = SendTheEffect(
-                    findEffect,
-                    this.userSeed,
-                    this.rngInstance
+        if (!GeneralConfig.Tiktok.TikfinityHTTPServer) {
+            let gift = internal_theGift.find((x) => x.id == data.giftId);
+            if (gift == undefined) return; // We skip the gift if not found
+            if (gift.run_effect != "") {
+                let effects = JSON.parse(this.effectDataBase)["Function"];
+                let findEffect = effects.find(
+                    (x) => x.description == gift.run_effect
                 );
-                clients.send(JSON.stringify(data));
-            });
+                if (findEffect == undefined) return;
+                if (findEffect.exclusive && data.repeatEnd == false) return; // We Skip Exclusive Effects (Avoid Crash)
+                this.wsServer.clients.forEach((clients) => {
+                    findEffect.id = "effect_" + findEffect.id;
+                    let data = SendTheEffect(
+                        findEffect,
+                        this.userSeed,
+                        this.rngInstance
+                    );
+                    clients.send(JSON.stringify(data));
+                });
+            }
+        }
+        if(this.voteMode == eVotingMode.VOTING) {
+            if (this.votePickerExclusiveUID.includes(data.uniqueId)) return;
+            switch (data.giftId) {
+                case 5655: { // Rose
+                    this.votePicker[0] += 5;
+                    this.votePickerExclusiveUID.push(data.uniqueId);
+                    this.votePicked |= ePickedVote.FIRST;
+                    break;
+                }
+                case 5333: { // Coffe
+                    this.votePicker[1] += 5;
+                    this.votePickerExclusiveUID.push(data.uniqueId);
+                    this.votePicked |= ePickedVote.SECOND;
+                    break;
+                }
+                case 6064: { // GG
+                    this.votePicker[2] += 5;
+                    this.votePickerExclusiveUID.push(data.uniqueId);
+                    this.votePicked |= ePickedVote.THIRD;
+                    break;
+                }
+            }
         }
     }
 
@@ -269,10 +304,9 @@ class TikTokHandler {
 
             this.tiktokConnection.on("message", (data) => {
                 let wsData = JSON.parse(data);
-                if(wsData.event == "chat") {
+                if (wsData.event == "chat") {
                     this.onMessage(wsData.data);
-                }
-                else if(wsData.event == "gift") {
+                } else if (wsData.event == "gift") {
                     this.onGift(wsData.data);
                 }
             });

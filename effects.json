@@ -1967,7 +1967,7 @@
             "exclusive": false
         },
         {
-            "category": "customEffects_Player",
+            "category": "CustomEffects_Player",
             "name": "Busted.....",
             "description": "PrankBusted",
             "id": "get_busted_fake",

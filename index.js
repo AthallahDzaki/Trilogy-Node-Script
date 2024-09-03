@@ -26,11 +26,11 @@ import { TikTok } from "./function/tiktok.js";
 import { sleep, findRunningProcess } from "./function/utils.js";
 
 import { GeneralConfig } from "./shared/shared.js";
+import { API } from "./function/api.js";
 
 let wsServer = new WebSocketServer({ port: GeneralConfig.General.WebSocketGUIPort || 42069 });
 
 console.log("Server Started!");
-
 
 let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
 
@@ -105,13 +105,19 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
     }
 
     if(GeneralConfig.Tiktok.TiktokEnable) {
-        if(GeneralConfig.RapidFire.RapidFireEnable)
+        if(GeneralConfig.Tiktok.TiktokForceEffect && GeneralConfig.Tiktok.TikfinityHTTPServer) {
+            console.log("Tiktok Force Effect and Tikfinity HTTP Server cannot be enabled at the same time!");
+            exit();
+        }
+        if(GeneralConfig.Tiktok.TikfinityHTTPServer)
+            new API(effectDataBase, wsServer, userSeed, rngInstance);
+        if(GeneralConfig.RapidFire.RapidFireEnable && GeneralConfig.Tiktok.TiktokVoteEnable)
             rapidFireHandler = new RapidFire(wsServer, effectDataBase, userSeed, rngInstance);
         TiktokHandler = new TikTok(wsServer, effectDataBase, rapidFireHandler, userSeed, rngInstance);
     }
 
     setInterval(async () => {
-        if(GeneralConfig.Tiktok.TiktokEnable) {
+        if(GeneralConfig.Tiktok.TiktokEnable && !GeneralConfig.Tiktok.TiktokUseBuiltInChaos) { // If Tiktok is enabled and not using built-in chaos
             TiktokHandler.HandleTheTimer();
         }
         else {

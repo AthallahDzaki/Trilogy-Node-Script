@@ -1,9 +1,9 @@
-import { vehicleName } from "./random.js";
+import { vehicleName, GenerateRandomVehicle } from "./random.js";
 import { GeneralConfig } from "../shared/shared.js";
 
 export class RapidFire {
     rapidFireEffect = [];
-    effectDataBase = [];
+    effectDataBase = "";
     wsServer = null;
     maxEffect = 5;
     rngInstance = null;
@@ -20,13 +20,10 @@ export class RapidFire {
     }
 
     addEffectByName(effectName, owner) {
+
         effectName = effectName.replace(" ", ""); // Remove Space
-        console.log("[RapidFire] Adding effect by name: ", effectName);
-        console.log("[RapidFire] Current Effect Count: ", this.rapidFireEffect.length);
-        console.log("[RapidFire] Max Effect Count: ", this.maxEffect);
         if(this.rapidFireEffect.length >= this.maxEffect) return;
         let effectList = this.effectDataBase["Function"];
-        console.log(effectList);
         let effect = effectList.find((x) => x.description == effectName);
         console.log("[RapidFire] Effect Found: ", effect);
         if (effect == undefined) return;
@@ -175,7 +172,7 @@ export class RapidFire {
                 data = {
                     type: "effect",
                     data: {
-                        effectID: effect.id,
+                        effectID: "effect_"+effect.id,
                         effectData: {
                             seed: -1,
                         },
