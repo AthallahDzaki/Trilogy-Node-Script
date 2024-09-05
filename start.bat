@@ -20,7 +20,7 @@ IF GIT_FOUND==0 (
 call npm install
 
 if NOT EXIST config.json (
-    REN config.json.ex config.json
+    COPY config.json.ex config.json
 )
 
 call node index.js
