@@ -313,7 +313,6 @@ class TikTokHandler {
 
             this.tiktokConnection.on("message", (data) => {
                 let wsData = JSON.parse(data);
-                console.log(wsData);
                 if (wsData.event == "chat") {
                     this.onMessage(wsData.data);
                 } else if (wsData.event == "gift") {
