@@ -11,67 +11,59 @@ The only difference is in the game memory checking system so that it does not se
 ## Getting Started (Normal Mode)
 
 1. Prerequire
-- None
+- Tikfinity (Recommended)
   
-2. Install
+2. Run 
 ```
-npm i
-```
-3. Rename config.json.ex to config.json
-
-4. Modify config.json
-*Tiktok Configuration will added in bottom section*
-
-5. Start Your GTA SA Until Game Fully Loaded
-
-6. Run
-```
-node index.js
+double click on start.bat
 ```
 
 ## Configuration
 ```
 {
-    "General": { // General Config (Relate to Chaos Mod Config)
-        "GUIWebsocketPort": 42069,
-        "Cooldown": 30000,
-        "EffectDuration": 30000,
-        "Seed": ""
+    "General": { // General Configuration
+        "GUIWebsocketPort": 42069, // Port for Websocket
+        "Cooldown": 30000, // Cooldown for Effect
+        "EffectDuration": 30000, // Duration for Effect
+        "Seed": "" // Seed for Random Effect
     },
 
-    "RapidFire" :{ // Rapid Fire
-        "RapidFireEnable": true, 
-        "RapidFireEffectDuration" : 15000 // Duration for All Effect from rapid fire
+    "RapidFire" :{ // Rapid Fire Configuration
+        "RapidFireEnable": true, // Enable Rapid Fire
+        "RapidFireEffectDuration" : 15000  // Duration for Rapid Fire
     },
 
     "Tiktok": {
         "TiktokEnable": true, // Enable Tiktok
-        "Tikfinity": false, // Integrate with Tikfinity (Tiktok Username can be empty)
-        "TiktokUsername": "@tiktok", // Tiktok Live Username
+        "TikfinityEnable": true, // Enable Tikfinity
+        "TikfinityHTTPServer": false, // Enable HTTP Server for Tikfinity
+        "TiktokUseBuiltInChaos" : false, // Use Built In Timer
+        "TiktokUsername": "@tiktok", // Tiktok Username (for non tikfinity)
         "TiktokVoteEnable": true, // Enable Vote
-        "TiktokVoteCooldown" : 30000, // Vote Cooldown (After Vote)
-        "TiktokForceEffect": false, // Force Effect, Effect can be specific at gifts.json
-        "TiktokSessionId" : "" // See Bottom Note! (Unused when Tikfinity enable)
+        "TiktokVoteCooldown" : 30000, // Cooldown for Vote
+        "TiktokForceEffect": true, // Force Effect
+        "TiktokSessionId" : "" // Session ID (for non tikfinity)
     },
 
-    "EffectForceEffect" : {
-        "ForceSpecificEffect" : false, // Force Specific Effect to Run
-        "EffectName" : "spawn_ultra_crazy_hobo" // Spawn Ultra Crazy Hobo
+    "EffectForceEffect" : { // Force Specific Effect
+        "ForceSpecificEffect" : false, // Force Specific Effect
+        "EffectName" : "spawn_ultra_crazy_hobo" // Effect Name
     },
 
-    "EffectForceCategory": {
-        "ForceSpecificCategory": false, // Force Specific Effect from choosen category
-        "CategoryName": "" // ...
+    "EffectForceCategory": { // Force Specific Category
+        "ForceSpecificCategory": false, // Force Specific Category
+        "CategoryName": "" // Category Name
     },
 
-    "Memory": {
-        "EnableMemoryCheck": true // Memory Check, available for Memory branch (Memory Mode)
+    "Memory": { // Unused
+        "EnableMemoryCheck": true // Enable Memory Check
     },
 
-    "Debug": {
-        "MemoryDebug": false // Debugging (Dev Only)
+    "Debug": { // Unused
+        "MemoryDebug": false // Enable Memory Debug
     }
 }
+
 ```
 
 Note: (Only for Non Tikfinity)

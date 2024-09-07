@@ -553,6 +553,13 @@
             "exclusive": false
         },
         {
+            "category" : "Vehicle",
+            "name" : "GiveMeBobcatPlease",
+            "description" : "GiveMeBobcatPlease",
+            "id" : "422",
+            "exclusive" : false
+        },
+        {
             "category": "Vehicle",
             "name": "TimeToKickAss",
             "description": "TimeToKickAss",

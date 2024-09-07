@@ -392,6 +392,11 @@ let vehiclePossibleToSpawn = [
     539, // Vortex
 ];
 
+const randomNess = (min, max, rngInstance) => {
+    const out = (rngInstance.unsafeNext() >>> 0) / 0x100000000;
+    return min + Math.floor(out * (max - min + 1));
+};
+
 export function GenerateSeed() {
     return Date.now() ^ (Math.random() * 0xfffffffffffff);
 }
@@ -481,12 +486,7 @@ export function GenerateRandomLocationFromEffect(effectDataBase, rngInstance) {
     // Remove an object from effectDataBase
 
     let effectList = effectDataBase["Location"];
-    // Then We Take The Effect
-    const randomNess = (min, max) => {
-        const out = (rngInstance.unsafeNext() >>> 0) / 0x100000000;
-        return min + Math.floor(out * (max - min + 1));
-    };
-    let num = randomNess(0, effectList.length - 1);
+    let num = randomNess(0, effectList.length - 1, rngInstance);
     let effect = effectList[num];
 
     // Then We Take The Name
@@ -511,11 +511,7 @@ export function GenerateRandomLocationFromEffect(effectDataBase, rngInstance) {
 }
 
 export function GenerateRandomVehicle(rngInstance) {
-    const randomNess = (min, max) => {
-        const out = (rngInstance.unsafeNext() >>> 0) / 0x100000000;
-        return min + Math.floor(out * (max - min + 1));
-    };
-    let num = randomNess(0, vehiclePossibleToSpawn.length - 1);
+    let num = randomNess(0, vehiclePossibleToSpawn.length - 1, rngInstance);
     return vehiclePossibleToSpawn[num];
 }
 
@@ -523,6 +519,9 @@ export function SendTheEffect(effect, userSeed, rngInstance) {
     let data = {};
     switch (effect.category) {
         case "Vehicle": {
+            if(effect.id.includes("effect_"))
+                effect.id = effect.id.split("effect_")[1];
+
             if (effect.id == -1) {
                 effect.id = GenerateRandomVehicle(rngInstance);
             }
@@ -576,7 +575,7 @@ export function SendTheEffect(effect, userSeed, rngInstance) {
                 };
                 break;
             } else if (effect.name == "Random Teleport") {
-                let rnd = Math.floor(Math.random());
+                let rnd = randomNess(0, 1, rngInstance);
                 if (rnd == 0) {
                     // Random By Game
                     data = {
@@ -614,6 +613,8 @@ export function SendTheEffect(effect, userSeed, rngInstance) {
             break;
         }
         case "Weather": {
+            if(effect.id.includes("effect_"))
+                effect.id = effect.id.split("effect_")[1];
             data = {
                 type: "effect",
                 data: {
@@ -626,23 +627,9 @@ export function SendTheEffect(effect, userSeed, rngInstance) {
             };
             break;
         }
-        // case "RapidFire": {
-        //     data = SendTheEffect(effect, userSeed, rngInstance);
-        //     break; // Ignore this For Some Time
-        //     data = {
-        //         type: "effect",
-        //         data: {
-        //             effectID: "effect_rapid_fire",
-        //             effectData: {},
-        //             duration: GeneralConfig.General.EffectDuration,
-        //             displayName: effect.name,
-        //             subtext: "",
-        //         },
-        //     };
-        //     RapidFireRemaining = 5;
-        //     break;
-        // }
         case "CustomVehicle": {
+            if(effect.id.includes("effect_"))
+                effect.id = effect.id.split("effect_")[1];
             let theModel = effect.id;
             if (theModel == -1) {
                 theModel = GenerateRandomVehicle(rngInstance);
