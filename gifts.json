@@ -21,7 +21,7 @@
         "id": 5655,
         "name": "Rose",
         "diamond_count": 1,
-        "run_effect": ""
+        "run_effect": "ThisAintYourCar"
     },
     {
         "id": 5778,
@@ -159,7 +159,7 @@
         "id": 5462,
         "name": "Tempe Tofu",
         "diamond_count": 5,
-        "run_effect": ""
+        "run_effect": "AllCarsGoBoom"
     },
     {
         "id": 5487,
@@ -195,7 +195,7 @@
         "id": 8913,
         "name": "Rosa",
         "diamond_count": 10,
-        "run_effect": ""
+        "run_effect": "NoWeaponsForYou"
     },
     {
         "id": 9371,
@@ -219,7 +219,7 @@
         "id": 10972,
         "name": "Cow",
         "diamond_count": 10,
-        "run_effect": ""
+        "run_effect": "Hospitality"
     },
     {
         "id": 5658,
@@ -291,7 +291,7 @@
         "id": 5566,
         "name": "Mishka Bear",
         "diamond_count": 100,
-        "run_effect": ""
+        "run_effect": "UltraCrazyHobo"
     },
     {
         "id": 5585,
@@ -369,7 +369,7 @@
         "id": 8207,
         "name": "The Crown",
         "diamond_count": 199,
-        "run_effect": ""
+        "run_effect": "GigachadHobo"
     },
     {
         "id": 9517,

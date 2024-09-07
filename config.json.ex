@@ -12,14 +12,14 @@
     },
 
     "Tiktok": {
-        "TiktokEnable": false,
+        "TiktokEnable": true,
         "TikfinityEnable": true,
-        "TikfinityHTTPServer": true,
+        "TikfinityHTTPServer": false,
         "TiktokUseBuiltInChaos" : false,
         "TiktokUsername": "@tiktok",
         "TiktokVoteEnable": true,
         "TiktokVoteCooldown" : 30000,
-        "TiktokForceEffect": false,
+        "TiktokForceEffect": true,
         "TiktokSessionId" : ""
     },
 

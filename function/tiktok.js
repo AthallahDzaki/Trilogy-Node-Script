@@ -100,6 +100,8 @@ class TikTokHandler {
                     );
 
                     this.voteEffect.push(theEffect);
+
+                    console.log(this.voteEffect);
                 }
 
                 if (this.voteRemaining <= 0) {
@@ -166,12 +168,13 @@ class TikTokHandler {
                     this.VotePickerUID = [];
                     this.voteEffect = [];
                 } else {
+                    let voteEffectName = this.voteEffect.map((x) => x.name);
                     this.wsServer.clients.forEach((clients) => {
                         clients.send(
                             JSON.stringify({
                                 type: "votes",
                                 data: {
-                                    effects: voteEffect,
+                                    effects: voteEffectName,
                                     votes: this.votePicker,
                                     pickedChoice: ePickedVote.UNDETERMINED,
                                 },
@@ -215,8 +218,13 @@ class TikTokHandler {
     onMessage(data) {
         switch (this.voteMode) {
             case eVotingMode.VOTING: {
-                if (this.votePickerUID.includes(data.uniqueId)) return;
-                switch (data.message) {
+                if (this.votePickerUID.includes(data.uniqueId)) {
+                    console.log("Not adding ", data.uniqueId, "Due already in queue");
+                    return;
+                }
+                console.log("Adding Vote", data.uniqueId, data.message);
+                let message = GeneralConfig.Tiktok.TikfinityEnable ? data.comment : data.message;
+                switch (message) {
                     case "#1": {
                         this.votePicker[0]++;
                         this.votePickerUID.push(data.uniqueId);
@@ -239,8 +247,9 @@ class TikTokHandler {
                 break;
             }
             case eVotingMode.RAPID_FIRE: {
+                let message = GeneralConfig.Tiktok.TikfinityEnable ? data.comment : data.message;
                 this.rapidFireHandler.addEffectByName(
-                    data.message,
+                    message,
                     data.uniqueId
                 );
                 break;
