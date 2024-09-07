@@ -2,15 +2,15 @@
 
 SET GIT_FOUND=0
 
-where git > nul 2>&1 || (
+where git > nul 2>&1 && (
     IF EXIST .git (
         SET GIT_FOUND=1
-        git pull
+        call git pull
     ) ELSE (
         SET GIT_FOUND=1
-        git init
-        git remote add origin https://github.com/AthallahDzaki/Trilogy-Node-Script
-        git pull
+        call git init
+        call git remote add origin https://github.com/AthallahDzaki/Trilogy-Node-Script
+        call git pull
     )
 )
 IF GIT_FOUND==0 (
