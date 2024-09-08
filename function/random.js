@@ -1,4 +1,5 @@
 import { GeneralConfig } from "../shared/shared.js";
+import fs from "fs";
 
 export let vehicleName = [
     "Landstalker",
@@ -554,25 +555,40 @@ export function SendTheEffect(effect, userSeed, rngInstance) {
                 };
             } else if (effect.name == "Fake Teleport") {
                 // Fake TP
-                let fakeEffect = GenerateRandomLocationFromEffect(
-                    effectDataBase,
-                    rngInstance
-                );
-                data = {
-                    type: "effect",
-                    data: {
-                        effectID: "effect_fake_teleport",
-                        effectData: {
-                            realEffectName: "Fake Teleport",
-                            posX: fakeEffect.posX,
-                            posY: fakeEffect.posY,
-                            posZ: fakeEffect.posZ,
+                let rnd = randomNess(0, 1, rngInstance);
+                if (rnd == 0) {
+                    // Random By Game
+                    data = {
+                        type: "effect",
+                        data: {
+                            effectID: "effect_fake_teleport",
+                            effectData: { seed: randomNess(0, 100000000, rngInstance) },
+                            duration: GeneralConfig.General.EffectDuration,
+                            displayName: "Random Teleport",
+                            subtext: "",
                         },
-                        duration: GeneralConfig.General.EffectDuration,
-                        displayName: fakeEffect.name,
-                        subtext: "",
-                    },
-                };
+                    };
+                } else if (rnd == 1) {
+                    // Random By Server
+                    let location = GenerateRandomLocationFromEffect(
+                        fs.readFileSync("effects.json"),
+                        rngInstance
+                    );
+                    data = {
+                        type: "effect",
+                        data: {
+                            effectID: "effect_fake_teleport",
+                            effectData: {
+                                posX: location.posX,
+                                posY: location.posY,
+                                posZ: location.posZ,
+                            },
+                            duration: GeneralConfig.General.EffectDuration,
+                            displayName: location.name,
+                            subtext: "",
+                        },
+                    };
+                }
                 break;
             } else if (effect.name == "Random Teleport") {
                 let rnd = randomNess(0, 1, rngInstance);
@@ -582,7 +598,7 @@ export function SendTheEffect(effect, userSeed, rngInstance) {
                         type: "effect",
                         data: {
                             effectID: "effect_random_teleport",
-                            effectData: { seed: userSeed },
+                            effectData: { seed: randomNess(0, 100000000, rngInstance) },
                             duration: GeneralConfig.General.EffectDuration,
                             displayName: "Random Teleport",
                             subtext: "",
@@ -591,7 +607,7 @@ export function SendTheEffect(effect, userSeed, rngInstance) {
                 } else if (rnd == 1) {
                     // Random By Server
                     let location = GenerateRandomLocationFromEffect(
-                        effectDataBase,
+                        fs.readFileSync("effects.json"),
                         rngInstance
                     );
                     data = {
@@ -647,6 +663,8 @@ export function SendTheEffect(effect, userSeed, rngInstance) {
             break;
         }
         default: {
+            if(!effect.id.includes("effect_"));
+                effect.id = "effect_" + effect.id;
             data = {
                 type: "effect",
                 data: {

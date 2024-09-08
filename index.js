@@ -27,6 +27,7 @@ import { sleep, findRunningProcess } from "./function/utils.js";
 
 import { GeneralConfig } from "./shared/shared.js";
 import { API } from "./function/api.js";
+import e from "express";
 
 let wsServer = new WebSocketServer({ port: GeneralConfig.General.WebSocketGUIPort || 42069 });
 
@@ -47,6 +48,32 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
             console.log("Converted Successfully!");
         } else console.log("Failed to convert!");
         exit(); // Exit the process
+    } else if (argv[2] == "--check") {
+        let effect = JSON.parse(readFileSync("./effects.json", "utf8"))["Function"];
+        console.log("Checking effects...");
+        effect.forEach((element) => {
+            if (typeof (element.category) == "undefined") {
+                console.log("Error: Category is not defined! for " + element.name);
+            }
+            if (typeof (element.name) == "undefined") {
+                console.log("Error: Effect is not defined! for " + element.name);
+            }
+
+            if (typeof (element.description) == "undefined") {
+                console.log("Error: Description is not defined! for " + element.name);
+            }
+
+            if (typeof (element.id) == "undefined") {
+                console.log("Error: ID is not defined! for " + element.name);
+            }
+
+            if (typeof (element.exclusive) == "undefined") {
+                console.log("Error: Exclusive is not defined! for " + element.name);
+            }
+
+            console.log("Checked Successfully!");
+            exit();
+        })
     }
 
     let effectDB = JSON.parse(readFileSync("./effects.json", "utf8"));

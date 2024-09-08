@@ -2763,6 +2763,7 @@
             "category": "Teleportation",
             "name": "Fake Teleport",
             "description": "HahaGotYourNose",
+            "id" : "fake_teleport",
             "exclusive": true
         },
         {

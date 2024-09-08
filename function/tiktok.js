@@ -239,10 +239,28 @@ class TikTokHandler {
                 : data.message;
             let splitMessage = message.split(" ");
             switch (splitMessage[0]) {
+                case "!feffect": {
+                    let effect = {
+                        category: "Function",
+                        name: "Dev Check Spawn " + splitMessage[1],
+                        description: "Dev Check",
+                        id: splitMessage[1],
+                        exclusive: false,
+                    };
+                    this.wsServer.clients.forEach((clients) => {
+                        let data = SendTheEffect(
+                            effect,
+                            this.userSeed,
+                            this.rngInstance
+                        );
+                        clients.send(JSON.stringify(data));
+                    });
+                    break;
+                }
                 case "!effect": {
                     let effect = JSON.parse(this.effectDataBase)[
                         "Function"
-                    ].find((x) => x.name == splitMessage[1]);
+                    ].find((x) => x.id == splitMessage[1]);
                     if (effect == undefined) return;
                     this.wsServer.clients.forEach((clients) => {
                         let data = SendTheEffect(
@@ -285,8 +303,6 @@ class TikTokHandler {
                             (x) => x.description == gift.run_effect
                         );
                         if (findEffect == undefined) return;
-                        if (findEffect.exclusive && !data.repeatEnd) return; // We Skip Exclusive Effects until not repeat
-                        if (data.repeatEnd && data.giftType == 1) return; // We skip the gift if it's repeat end (Checker) (Gift Type 2 can pass this)
                         this.wsServer.clients.forEach((clients) => {
                             findEffect.id = "effect_" + findEffect.id;
                             let data = SendTheEffect(
@@ -294,7 +310,6 @@ class TikTokHandler {
                                 this.userSeed,
                                 this.rngInstance
                             );
-                            console.log(data);
                             clients.send(JSON.stringify(data));
                         });
                     }
@@ -359,13 +374,12 @@ class TikTokHandler {
                 if (data.repeatEnd && data.giftType == 1) return; // We skip the gift if it's repeat end (Checker) (Gift Type 2 can pass this)
                 this.wsServer.clients.forEach((clients) => {
                     findEffect.id = "effect_" + findEffect.id;
-                    let data = SendTheEffect(
+                    let edata = SendTheEffect(
                         findEffect,
                         this.userSeed,
                         this.rngInstance
                     );
-                    console.log(data);
-                    clients.send(JSON.stringify(data));
+                    clients.send(JSON.stringify(edata));
                 });
             }
         }
