@@ -1698,15 +1698,45 @@
             "category": "CustomEffects_NPCs",
             "name": "Move All Angry Hobo to Player",
             "description": "AngryHoboToPlayer",
-            "id": "move_angry_hobo_to_player",
+            "id": "move_all_angry_hobo_to_player",
             "exclusive": true
         },
         {
             "category": "CustomEffects_NPCs",
             "name": "Move All Angry Hobo to Random Location",
             "description": "AngryHoboToRandomLocation",
-            "id": "move_angry_hobo_to_random",
+            "id": "move_all_angry_hobo_to_random",
             "exclusive": true
+        },
+        {
+            "category": "CustomEffects_NPCs",
+            "name": "Remove All Angry Hobo",
+            "description": "RemoveAngryHobo",
+            "id": "remove_random_angry_hobo"
+        },
+        {
+            "category" : "CustomEffects_NPCs",
+            "name" : "remove Nearest Angry Hobo",
+            "description" : "RemoveNearestAngryHobo",
+            "id" : "remove_nearest_angry_hobo"
+        },
+        {
+            "category" : "CustomEffects_NPCs",
+            "name" : "remove Nearest Angry Hobo",
+            "description" : "RemoveNearestAngryHobo",
+            "id" : "remove_farthest_angry_hobo"
+        },
+        {
+            "category" : "CustomEffects_NPCs",
+            "name" : "remove Nearest Angry Hobo",
+            "description" : "RemoveNearestAngryHobo",
+            "id" : "remove_all_angry_hobo"
+        },
+        {
+            "category" : "CustomEffects_NPCs",
+            "name" : "remove Nearest Angry Hobo",
+            "description" : "RemoveNearestAngryHobo",
+            "id" : "remove_nearest_angry_hobo"
         },
         {
             "category": "CustomEffects_NPCs",

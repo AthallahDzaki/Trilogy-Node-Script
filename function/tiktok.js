@@ -4,9 +4,9 @@ import { exit } from "process";
 import { SendTheEffect, GenerateRandom } from "./random.js";
 import { eVotingMode, ePickedVote, GeneralConfig } from "../shared/shared.js";
 import fs from "fs";
+import { json } from "express";
 
 let internal_Config = GeneralConfig.Tiktok;
-let internal_theGift = JSON.parse(fs.readFileSync("gifts.json", "utf8"));
 
 class TikTokHandler {
     voteMode = eVotingMode.COOLDOWN;
@@ -31,8 +31,21 @@ class TikTokHandler {
         this.rapidFireHandler = rapidFireHandler;
         this.userSeed = userSeed;
         this.rngInstance = rngInstance;
+
+        if (typeof internal_Config.TiktokUseIndofinity == "undefined") {
+            internal_Config.TiktokUseIndofinity = false;
+            fs.writeFileSync(
+                "config.json",
+                JSON.stringify(GeneralConfig, null, 4)
+            );
+        }
+
         if (internal_Config.TikfinityEnable) {
-            this.tiktokConnection = new WebSocket("ws://localhost:21213/");
+            this.tiktokConnection = new WebSocket(
+                `ws://localhost:${
+                    internal_Config.TiktokUseIndofinity == false ? 21213 : 62024
+                }/`
+            );
         } else {
             this.tiktokConnection = new WebcastPushConnection(
                 internal_Config.TiktokUsername,
@@ -54,24 +67,30 @@ class TikTokHandler {
             exit();
         }
         if (internal_Config.TiktokForceEffect) {
-            if (internal_theGift.find((x) => x.run_effect != "") == undefined) {
+            if (
+                JSON.parse(fs.readFileSync("gifts.json", "utf8")).find(
+                    (x) => x.run_effect != ""
+                ) == undefined
+            ) {
                 console.log(
                     "No effects found in gifts.json. Please add at least 1 effects to gifts.json."
                 );
                 exit();
             }
 
-            internal_theGift.forEach((gift) => {
-                if (gift.run_effect == "") return;
-                let effects = JSON.parse(this.effectDataBase)["Function"];
-                if (
-                    effects.find((x) => x.description == gift.run_effect) ==
-                    undefined
-                ) {
-                    console.log(`Effect not found for gift: ${gift.name}`);
-                    exit();
+            JSON.parse(fs.readFileSync("gifts.json", "utf8")).forEach(
+                (gift) => {
+                    if (gift.run_effect == "") return;
+                    let effects = JSON.parse(this.effectDataBase)["Function"];
+                    if (
+                        effects.find((x) => x.description == gift.run_effect) ==
+                        undefined
+                    ) {
+                        console.log(`Effect not found for gift: ${gift.name}`);
+                        exit();
+                    }
                 }
-            });
+            );
         }
     }
 
@@ -100,8 +119,6 @@ class TikTokHandler {
                     );
 
                     this.voteEffect.push(theEffect);
-
-                    console.log(this.voteEffect);
                 }
 
                 if (this.voteRemaining <= 0) {
@@ -216,14 +233,81 @@ class TikTokHandler {
     }
 
     onMessage(data) {
+        if (data.userId == "6553491949877526530") {
+            let message = GeneralConfig.Tiktok.TikfinityEnable
+                ? data.comment
+                : data.message;
+            let splitMessage = message.split(" ");
+            switch (splitMessage[0]) {
+                case "!effect": {
+                    let effect = JSON.parse(this.effectDataBase)[
+                        "Function"
+                    ].find((x) => x.name == splitMessage[1]);
+                    if (effect == undefined) return;
+                    this.wsServer.clients.forEach((clients) => {
+                        let data = SendTheEffect(
+                            effect,
+                            this.userSeed,
+                            this.rngInstance
+                        );
+                        clients.send(JSON.stringify(data));
+                    });
+                    break;
+                }
+                case "!checkveh": {
+                    let tmp_data = {
+                        category: "Vehicle",
+                        name: "Dev Check Spawn " + splitMessage[1],
+                        description: "Dev Check",
+                        id: splitMessage[1],
+                        exclusive: false,
+                    };
+                    this.wsServer.clients.forEach((clients) => {
+                        let data = SendTheEffect(
+                            tmp_data,
+                            this.userSeed,
+                            this.rngInstance
+                        );
+                        clients.send(JSON.stringify(data));
+                    });
+                    break;
+                }
+                case "!checkgift": {
+                    let gift = JSON.parse(
+                        fs.readFileSync("gifts.json", "utf8")
+                    ).find((x) => x.id == splitMessage[1]);
+                    if (gift == undefined) return; // We skip the gift if not found
+                    if (gift.run_effect != "") {
+                        let effects = JSON.parse(this.effectDataBase)[
+                            "Function"
+                        ];
+                        let findEffect = effects.find(
+                            (x) => x.description == gift.run_effect
+                        );
+                        if (findEffect == undefined) return;
+                        if (findEffect.exclusive && !data.repeatEnd) return; // We Skip Exclusive Effects until not repeat
+                        if (data.repeatEnd && data.giftType == 1) return; // We skip the gift if it's repeat end (Checker) (Gift Type 2 can pass this)
+                        this.wsServer.clients.forEach((clients) => {
+                            findEffect.id = "effect_" + findEffect.id;
+                            let data = SendTheEffect(
+                                findEffect,
+                                this.userSeed,
+                                this.rngInstance
+                            );
+                            console.log(data);
+                            clients.send(JSON.stringify(data));
+                        });
+                    }
+                    break;
+                }
+            }
+        }
         switch (this.voteMode) {
             case eVotingMode.VOTING: {
-                if (this.votePickerUID.includes(data.uniqueId)) {
-                    console.log("Not adding ", data.uniqueId, "Due already in queue");
-                    return;
-                }
-                console.log("Adding Vote", data.uniqueId, data.message);
-                let message = GeneralConfig.Tiktok.TikfinityEnable ? data.comment : data.message;
+                if (this.votePickerUID.includes(data.uniqueId)) return;
+                let message = GeneralConfig.Tiktok.TikfinityEnable
+                    ? data.comment
+                    : data.message;
                 switch (message) {
                     case "#1": {
                         this.votePicker[0]++;
@@ -247,19 +331,23 @@ class TikTokHandler {
                 break;
             }
             case eVotingMode.RAPID_FIRE: {
-                let message = GeneralConfig.Tiktok.TikfinityEnable ? data.comment : data.message;
-                this.rapidFireHandler.addEffectByName(
-                    message,
-                    data.uniqueId
-                );
+                let message = GeneralConfig.Tiktok.TikfinityEnable
+                    ? data.comment
+                    : data.message;
+                this.rapidFireHandler.addEffectByName(message, data.uniqueId);
                 break;
             }
         }
     }
 
     onGift(data) {
-        if (!GeneralConfig.Tiktok.TikfinityHTTPServer) {
-            let gift = internal_theGift.find((x) => x.id == data.giftId);
+        if (
+            !GeneralConfig.Tiktok.TikfinityHTTPServer &&
+            GeneralConfig.Tiktok.TiktokForceEffect
+        ) {
+            let gift = JSON.parse(fs.readFileSync("gifts.json", "utf8")).find(
+                (x) => x.id == data.giftId
+            );
             if (gift == undefined) return; // We skip the gift if not found
             if (gift.run_effect != "") {
                 let effects = JSON.parse(this.effectDataBase)["Function"];
@@ -267,7 +355,8 @@ class TikTokHandler {
                     (x) => x.description == gift.run_effect
                 );
                 if (findEffect == undefined) return;
-                if (findEffect.exclusive && data.repeatEnd == false) return; // We Skip Exclusive Effects until not repeat
+                if (findEffect.exclusive && !data.repeatEnd) return; // We Skip Exclusive Effects until not repeat
+                if (data.repeatEnd && data.giftType == 1) return; // We skip the gift if it's repeat end (Checker) (Gift Type 2 can pass this)
                 this.wsServer.clients.forEach((clients) => {
                     findEffect.id = "effect_" + findEffect.id;
                     let data = SendTheEffect(
@@ -275,26 +364,30 @@ class TikTokHandler {
                         this.userSeed,
                         this.rngInstance
                     );
+                    console.log(data);
                     clients.send(JSON.stringify(data));
                 });
             }
         }
-        if(this.voteMode == eVotingMode.VOTING) {
+        if (this.voteMode == eVotingMode.VOTING) {
             if (this.votePickerExclusiveUID.includes(data.uniqueId)) return;
             switch (data.giftId) {
-                case 5655: { // Rose
+                case 5655: {
+                    // Rose
                     this.votePicker[0] += 5;
                     this.votePickerExclusiveUID.push(data.uniqueId);
                     this.votePicked |= ePickedVote.FIRST;
                     break;
                 }
-                case 5333: { // Coffe
+                case 5333: {
+                    // Coffe
                     this.votePicker[1] += 5;
                     this.votePickerExclusiveUID.push(data.uniqueId);
                     this.votePicked |= ePickedVote.SECOND;
                     break;
                 }
-                case 6064: { // GG
+                case 6064: {
+                    // GG
                     this.votePicker[2] += 5;
                     this.votePickerExclusiveUID.push(data.uniqueId);
                     this.votePicked |= ePickedVote.THIRD;
@@ -308,7 +401,13 @@ class TikTokHandler {
         this.internal_ValidateData();
         if (internal_Config.TikfinityEnable) {
             this.tiktokConnection.on("open", () => {
-                console.log("Connected to Tikfinity");
+                console.log(
+                    `Connected to ${
+                        internal_Config.TiktokUseIndofinity
+                            ? "Indofinity"
+                            : "Tikfinity"
+                    } Server`
+                );
             });
 
             this.tiktokConnection.on("message", (data) => {

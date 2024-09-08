@@ -86,23 +86,23 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
     let cooldown = GeneralConfig.General.Cooldown || 30000;
     let remaining = cooldown;
 
-    let loading = ora("Waiting GTA SA to Start"),
-        loadingDone = false;
-    loading.spinner.interval = 100;
-    loading.start();
+    // let loading = ora("Waiting GTA SA to Start"),
+    //     loadingDone = false;
+    // loading.spinner.interval = 100;
+    // loading.start();
 
-    while (true) {
-        if (!findRunningProcess("gta_sa.exe")) {
-            await sleep(1000);
-            continue; // Skip the rest of the loop
-        }
+    // while (true) {
+    //     if (!findRunningProcess("gta_sa.exe")) {
+    //         await sleep(1000);
+    //         continue; // Skip the rest of the loop
+    //     }
 
-        if (loadingDone == false) {
-            loading.succeed("GTA SA Found!");
-            loadingDone = true;
-	        break;
-        }
-    }
+    //     if (loadingDone == false) {
+    //         loading.succeed("GTA SA Found!");
+    //         loadingDone = true;
+	//         break;
+    //     }
+    // }
 
     if(GeneralConfig.Tiktok.TiktokEnable) {
         if(GeneralConfig.Tiktok.TiktokForceEffect && GeneralConfig.Tiktok.TikfinityHTTPServer) {
