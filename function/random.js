@@ -663,7 +663,7 @@ export function SendTheEffect(effect, userSeed, rngInstance) {
             break;
         }
         default: {
-            if(!effect.id.includes("effect_"));
+            if(!effect.id.includes("effect_"))
                 effect.id = "effect_" + effect.id;
             data = {
                 type: "effect",

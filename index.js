@@ -160,6 +160,7 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
                 );
                 wsServer.clients.forEach((clients) => {
                     let data = SendTheEffect(effect, userSeed, rngInstance);
+                    console.log("Sending Effect", data);
                     clients.send(JSON.stringify(data));
                 });
             } else {
