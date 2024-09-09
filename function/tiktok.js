@@ -4,7 +4,6 @@ import { exit } from "process";
 import { SendTheEffect, GenerateRandom } from "./random.js";
 import { eVotingMode, ePickedVote, GeneralConfig } from "../shared/shared.js";
 import fs from "fs";
-import { json } from "express";
 
 let internal_Config = GeneralConfig.Tiktok;
 
@@ -50,7 +49,7 @@ class TikTokHandler {
             this.tiktokConnection = new WebcastPushConnection(
                 internal_Config.TiktokUsername,
                 {
-                    sessionId: internal_Config.TiktokSessionId || null,
+                    sessionId: internal_Config.TiktokSessionId || null
                 }
             );
         }

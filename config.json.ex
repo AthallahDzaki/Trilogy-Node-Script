@@ -20,7 +20,8 @@
         "TiktokVoteEnable": true,
         "TiktokVoteCooldown" : 30000,
         "TiktokForceEffect": true,
-        "TiktokSessionId" : ""
+        "TiktokSessionId" : "",
+        "TiktokUseIndofinity": true
     },
 
     "EffectForceEffect" : {

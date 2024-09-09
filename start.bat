@@ -5,12 +5,12 @@ SET GIT_FOUND=0
 where git > nul 2>&1 && (
     IF EXIST .git (
         SET GIT_FOUND=1
-        call git pull
+        call git pull origin normal
     ) ELSE (
         SET GIT_FOUND=1
         call git init
         call git remote add origin https://github.com/AthallahDzaki/Trilogy-Node-Script
-        call git pull
+        call git pull origin normal
     )
 )
 IF GIT_FOUND==0 (
@@ -19,9 +19,20 @@ IF GIT_FOUND==0 (
 
 call npm install
 
+SET NEED_CONFIG=0
+
 if NOT EXIST config.json (
     COPY config.json.ex config.json
+    SET NEED_CONFIG=1
 )
 
+IF NEED_CONFIG==1 (
+    echo "New user? Please edit config.json file"
+    echo "If you use Tiktok Interactive, set TiktokEnable to true, TikfinityEnable to true and TiktokForceEffect to true."
+    echo "If you want use Action, set TiktokEnable to true, TikfinityEnable to true, and TikfinityHTTPServer to true."
+    echo "If you use Indofinity, set TiktokUseIndofinity to true."
+    pause
+    exit
+)
 call node index.js
 pause

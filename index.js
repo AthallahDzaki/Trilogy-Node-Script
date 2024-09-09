@@ -27,7 +27,6 @@ import { sleep, findRunningProcess } from "./function/utils.js";
 
 import { GeneralConfig } from "./shared/shared.js";
 import { API } from "./function/api.js";
-import e from "express";
 
 let wsServer = new WebSocketServer({ port: GeneralConfig.General.WebSocketGUIPort || 42069 });
 
@@ -100,11 +99,6 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
     }
 
     let effectDataBase = readFileSync("./effects.json", "utf8");
-    
-//    if (GeneralConfig.Debug.MemoryDebug) {
-//        DebugMemory();
-//        return; // We Skip Entire Script
-//    }
 
     userSeed = GeneralConfig.General.Seed || GenerateSeed();
     console.log(`Seed: ${userSeed}`);
