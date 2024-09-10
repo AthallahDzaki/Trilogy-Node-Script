@@ -1,18 +1,20 @@
 @echo off
 
-# First Copy gifts.json to another directory
 
 COPY gifts.json gifts.json.bak
 
 where git > nul 2>&1 && (
     IF EXIST .git (
+        call git add .
+        call git commit -m "Migration"
         call git stash
-        call git pull origin normal
+        call git pull origin master
+        call git stash clear
     ) ELSE (
         echo "Git not found, you can manually download the latest version from https://github.com/AthallahDzaki/Trilogy-Node-Script/releases"
     )    
 )
 
-# Then restore gifts.json
+echo "Migrate" > migrate.txt
 
 COPY gifts.json.bak gifts.json
