@@ -12,8 +12,7 @@ where git > nul 2>&1 && (
         call git remote add origin https://github.com/AthallahDzaki/Trilogy-Node-Script
         call git pull origin master --allow-unrelated-histories 
     )
-    SET OX0 = 0
-    IF NOT EXIST migrated.txt (
+    IF NOT EXIST migrate.txt (
         call migrate
     )
 )
