@@ -232,7 +232,8 @@ class TikTokHandler {
     }
 
     onMessage(data) {
-        if (data.userId == "6553491949877526530") {
+        console.log(data);
+        if (data.uniqueId == "athallah.dzaki") {
             let message = GeneralConfig.Tiktok.TikfinityEnable
                 ? data.comment
                 : data.message;
