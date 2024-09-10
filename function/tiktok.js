@@ -370,7 +370,7 @@ class TikTokHandler {
                     (x) => x.description == gift.run_effect
                 );
                 if (findEffect == undefined) return;
-                if (findEffect.exclusive && !data.repeatEnd) return; // We Skip Exclusive Effects until not repeat
+                // if (findEffect.exclusive && !data.repeatEnd) return; // We Skip Exclusive Effects until not repeat
                 if (data.repeatEnd && data.giftType == 1) return; // We skip the gift if it's repeat end (Checker) (Gift Type 2 can pass this)
                 this.wsServer.clients.forEach((clients) => {
                     findEffect.id = "effect_" + findEffect.id;
