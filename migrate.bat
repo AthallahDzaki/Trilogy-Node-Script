@@ -12,6 +12,6 @@ where git > nul 2>&1 && (
     )    
 )
 
-echo "Migrate" > migrate.txt
+echo DONE > migrate.txt
 
 COPY gifts.json.bak gifts.json
