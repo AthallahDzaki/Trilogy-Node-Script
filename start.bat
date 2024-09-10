@@ -10,7 +10,7 @@ where git > nul 2>&1 && (
         SET GIT_FOUND=1
         call git init
         call git remote add origin https://github.com/AthallahDzaki/Trilogy-Node-Script
-        call git pull origin master
+        call git pull origin master --allow-unrelated-histories 
     )
     SET OX0 = 0
     IF NOT EXIST migrated.txt (
