@@ -10,8 +10,7 @@ IF EXIST OM0.txt (
 where git > nul 2>&1 && (
     IF EXIST .git (
         SET GIT_FOUND=1
-        call git fetch
-        call git reset --hard origin/master
+        call migrate
     ) ELSE (
         SET GIT_FOUND=1
         call git init
