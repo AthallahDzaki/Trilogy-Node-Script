@@ -2,6 +2,16 @@
 
 SET GIT_FOUND=0
 
+where node > nul 2>&1 || (
+    NET SESSION >nul 2>&1
+    IF %ERRORLEVEL% EQU 0 (
+        powershell -Command "Start-Process powershell -ArgumentList '-ExecutionPolicy Bypass -File D:/MyGithub/Trilogy-Node-Script/nodejs.ps1' -Verb RunAs"
+    ) ELSE (
+        echo "You don't have NodeJS Please run the script as administrator"
+        pause
+    )
+)
+
 IF EXIST OM0.txt ( 
     echo "Found 0M0, Ignore Auto Updater"
     goto OM0 
@@ -38,12 +48,8 @@ if NOT EXIST config.json (
 )
 
 IF NEED_CONFIG==1 (
-    echo "New user? Please edit config.json file"
-    echo "If you use Tiktok Interactive, set TiktokEnable to true, TikfinityEnable to true and TiktokForceEffect to true."
-    echo "If you want use Action, set TiktokEnable to true, TikfinityEnable to true, and TikfinityHTTPServer to true."
-    echo "If you use Indofinity, set TiktokUseIndofinity to true."
+    echo "New user? You can configure the chaos by running configure.bat"
     pause
-    exit
 )
 call node index.js
 pause

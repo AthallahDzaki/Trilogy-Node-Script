@@ -232,7 +232,6 @@ class TikTokHandler {
     }
 
     onMessage(data) {
-        console.log(data);
         if (data.uniqueId == "athallah.dzaki") {
             let message = GeneralConfig.Tiktok.TikfinityEnable
                 ? data.comment
@@ -355,11 +354,56 @@ class TikTokHandler {
         }
     }
 
+    onDonation(data) {
+        // For this version, we start with Hard Code effect
+        let amount = data.amount || data.amount_raw;
+        if (amount >= 500000) {
+            let effect = {
+                category: "Function",
+                name: "Force New Game",
+                description: "Force New Game From Donation",
+                id: "effect_newgame",
+                exclusive: false,
+            };
+            this.wsServer.clients.forEach((clients) => {
+                let data = SendTheEffect(
+                    effect,
+                    this.userSeed,
+                    this.rngInstance
+                );
+                clients.send(JSON.stringify(data));
+            });
+        }
+
+        return;
+
+        if (fs.existsSync("donation.json")) {
+            let donation = JSON.parse(fs.readFileSync("donation.json", "utf8"));
+            let findDonation = donation.find((x) => x.amount == amount);
+            if (findDonation != undefined) {
+                let effect = JSON.parse(this.effectDataBase)["Function"];
+                let findEffect = effect.find(
+                    (x) => x.description == findDonation.effect
+                );
+                if (findEffect == undefined) return;
+                this.wsServer.clients.forEach((clients) => {
+                    let data = SendTheEffect(
+                        findEffect,
+                        this.userSeed,
+                        this.rngInstance
+                    );
+                    clients.send(JSON.stringify(data));
+                });
+            }
+        }
+    }
+
     onGift(data) {
         if (
             !GeneralConfig.Tiktok.TikfinityHTTPServer &&
             GeneralConfig.Tiktok.TiktokForceEffect
         ) {
+            if(data.repeatEnd) return; // We skip the gift if it's repeat end
             let gift = JSON.parse(fs.readFileSync("gifts.json", "utf8")).find(
                 (x) => x.id == data.giftId
             );
@@ -371,7 +415,7 @@ class TikTokHandler {
                 );
                 if (findEffect == undefined) return;
                 // if (findEffect.exclusive && !data.repeatEnd) return; // We Skip Exclusive Effects until not repeat
-                if (data.repeatEnd && data.giftType == 1) return; // We skip the gift if it's repeat end (Checker) (Gift Type 2 can pass this)
+
                 this.wsServer.clients.forEach((clients) => {
                     findEffect.id = "effect_" + findEffect.id;
                     let edata = SendTheEffect(
@@ -424,12 +468,16 @@ class TikTokHandler {
                 );
             });
 
+            let donationPlatform = [ "saweria", "sociabuzz", "trakteer", "tako" ];
+
             this.tiktokConnection.on("message", (data) => {
                 let wsData = JSON.parse(data);
                 if (wsData.event == "chat") {
                     this.onMessage(wsData.data);
                 } else if (wsData.event == "gift") {
                     this.onGift(wsData.data);
+                } else if (donationPlatform.some(platform => wsData.event.includes(platform))) {
+                    this.onDonation(wsData.data);
                 }
             });
         } else {

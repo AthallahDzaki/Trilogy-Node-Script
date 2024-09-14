@@ -1,3 +1,17 @@
+/*
+SPECIAL THANKS TO FRANKENSTEIN for Beta Testing and helping me to fix the bugs!
+
+THANKS TO :
+
+- Frankenstein (Beta Tester)
+- WDGOfficial (Beta Tester)
+- DinoAndrean (Beta Tester)
+- gta-chaos-mod (For The Chaos Mod)
+- TikTok (Platform)
+- Tikfinity (For The API)
+- Indofinity (For The API)
+*/
+
 // import memoryjs from "memoryjs";
 import ora from "ora";
 
@@ -6,13 +20,6 @@ import { Convert } from "./function/convert.js";
 import { argv, exit } from "process";
 import { readFileSync, writeFileSync } from "fs";
 import { xoroshiro128plus } from "pure-rand";
-import * as Diff from 'diff';
-
-import axios from "axios";
-
-import * as readline from "readline/promises";
-
-// import { DebugMemory } from "./function/memory.js";
 import {
     GenerateRandom,
     GenerateSeed,
@@ -75,29 +82,6 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
         })
     }
 
-    let effectDB = JSON.parse(readFileSync("./effects.json", "utf8"));
-
-    let effect = await axios.get("https://raw.githubusercontent.com/AthallahDzaki/Trilogy-Node-Script/normal/effects.json")
-    let dataJSON = JSON.parse(JSON.stringify(effect.data, null, 4));
-    let diff = Diff.diffJson(dataJSON, effectDB), diffCount = 0;
-    diff.forEach((part) => {
-        if(part.added || part.removed) diffCount++;
-    });
-    if(diffCount > 0) {
-        let rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout,
-        });
-        let ans = await rl.question("New Effects Detected, Do you want to update it? (Y/N): ");
-        if(ans.toLowerCase() == "y") {
-            writeFileSync("./effects.json", JSON.stringify(effect.data, null, 4), "utf8");
-            console.log("Effects Updated!");
-        } else {
-            console.log("Effects Not Updated!");
-        }
-        rl.close();
-    }
-
     let effectDataBase = readFileSync("./effects.json", "utf8");
 
     userSeed = GeneralConfig.General.Seed || GenerateSeed();
@@ -154,7 +138,6 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
                 );
                 wsServer.clients.forEach((clients) => {
                     let data = SendTheEffect(effect, userSeed, rngInstance);
-                    console.log("Sending Effect", data);
                     clients.send(JSON.stringify(data));
                 });
             } else {

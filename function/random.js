@@ -680,5 +680,6 @@ export function SendTheEffect(effect, userSeed, rngInstance) {
             break;
         }
     }
+    console.log("Sending Effect", data);
     return data;
 }
