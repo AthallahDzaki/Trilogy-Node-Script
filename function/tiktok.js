@@ -357,12 +357,13 @@ class TikTokHandler {
     onDonation(data) {
         // For this version, we start with Hard Code effect
         let amount = data.amount || data.amount_raw;
+        console.log(amount);
         if (amount >= 500000) {
             let effect = {
                 category: "Function",
-                name: "Force New Game",
+                name: "Let's Start New Game",
                 description: "Force New Game From Donation",
-                id: "effect_newgame",
+                id: "newgame",
                 exclusive: false,
             };
             this.wsServer.clients.forEach((clients) => {

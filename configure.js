@@ -27,14 +27,14 @@ let argv = process.argv;
         }
         case "--enable-rapidfire" : {
             let config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
-            config.General.RapidFireEnabled = true;
+            config.General.RapidFireEnable = true;
             fs.writeFileSync("./config.json", JSON.stringify(config, null, 4), "utf8");
             console.log("RapidFire Enabled");
             break;
         }
         case "--disable-rapidfire" : {
             let config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
-            config.General.RapidFireEnabled = false;
+            config.General.RapidFireEnable = false;
             fs.writeFileSync("./config.json", JSON.stringify(config, null, 4), "utf8");
             console.log("RapidFire Disabled");
             break;
@@ -48,7 +48,7 @@ let argv = process.argv;
         }
         case "--enable-tiktok" : {
             let config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
-            config.Tiktok.TiktokEnabled = true;
+            config.Tiktok.TiktokEnable = true;
             fs.writeFileSync("./config.json", JSON.stringify(config, null, 4), "utf8");
             console.log("TikTok Enabled");
             break;
@@ -104,28 +104,28 @@ let argv = process.argv;
         }
         case "--tiktok-username" : {
             let config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
-            config.Tiktok.TikTokUsername = argv[3];
+            config.Tiktok.TiktokUsername = argv[3];
             fs.writeFileSync("./config.json", JSON.stringify(config, null, 4), "utf8");
             console.log("Username Changed to " + argv[3]);
             break;
         }
         case "--enable-vote" : {
             let config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
-            config.Tiktok.TikTokVoteEnabled = true;
+            config.Tiktok.TiktokVoteEnable = true;
             fs.writeFileSync("./config.json", JSON.stringify(config, null, 4), "utf8");
             console.log("Vote Enabled");
             break;
         }
         case "--disable-vote" : {
             let config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
-            config.Tiktok.TikTokVoteEnabled = false;
+            config.Tiktok.TiktokVoteEnable = false;
             fs.writeFileSync("./config.json", JSON.stringify(config, null, 4), "utf8");
             console.log("Vote Disabled");
             break;
         }
         case "--tiktok-vote-cooldown" : {
             let config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
-            config.Tiktok.TikTokVoteCooldown = argv[3];
+            config.Tiktok.TiktokVoteCooldown = argv[3];
             fs.writeFileSync("./config.json", JSON.stringify(config, null, 4), "utf8");
             console.log("Vote Cooldown Changed to " + argv[3]);
             break;
