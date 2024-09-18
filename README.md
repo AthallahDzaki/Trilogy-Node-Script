@@ -9,7 +9,7 @@ The only difference is in the game memory checking system so that it does not se
 ## Download
 
 Click <b>GREEN!</b> (CODE) button and click Download ZIP.
-or you can clone this repo with git clone [https://](https://github.com/AthallahDzaki/Trilogy-Node-Script)
+or you can clone this repo with git clone [[https://](https://github.com/AthallahDzaki/Trilogy-Node-Script)](https://github.com/AthallahDzaki/Trilogy-Node-Script)
 
 ## Getting Started (Normal Mode)
 
