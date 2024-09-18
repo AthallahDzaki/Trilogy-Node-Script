@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../components/head'); %>
+</head>
+
+<body>
+  <script src="assets/static/js/initTheme.js"></script>
+  <div id="app">
+    <%- include('../components/sidebar'); %>
+      <div id="main">
+        <header class="mb-3">
+          <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+          </a>
+        </header>
+        <div class="page-heading">
+          <div class="page-title">
+            <div class="row">
+              <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>SA-CHAOS</h3>
+              </div>
+            </div>
+          </div>
+          <section class="section">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">About</h4>
+              </div>
+              <div class="card-body">
+                <h1 id="gta-trilogy-chaos-mod-reborn">GTA Trilogy Chaos Mod: Reborn</h1>
+                <p>Welcome to the official <strong>GTA Trilogy Chaos Mod: Reborn</strong> repository!</p>
+                <p>This repository, together with this README, is still very much <strong>WIP</strong>.</p>
+                <h1 id="why-reborn">Why &quot;Reborn&quot;?</h1>
+                <p>The mod had some issues and was my first C++ project, thus I did not have a lot of experience on how
+                  to best do a lot of things right.</p>
+                <p>The <strong>&quot;Reborn&quot;</strong> project aims to fix this by pretty much <strong>rewriting the
+                    majority of the mod from scratch.</strong> (except code for drawing effects and a few other things)
+                </p>
+                <p>It will also be easier for interested developers to contribute to the project be it with their own
+                  effects or with help on the general codebase.</p>
+                <h1 id="how-can-i-help--add-new-effects">How can I help / add new effects?</h1>
+                <p>Check out the <a href="CONTRIBUTING.md">CONTRIBUTING</a> file for more information.</p>
+                <h1 id="what-does-this-mod-do">What does this mod do?</h1>
+                <p>Similar to the old <a href="https://github.com/Lighnat0r-pers/gta-vc-chaos">Vice City Chaos% mod</a>
+                  by <a href="https://github.com/Lighnat0r">Lightnat0r</a>, it activates effects in the corresponding
+                  game every X seconds / minutes (cooldown can be defined in the GUI).</p>
+                <h1 id="which-gta-games-does-it-support">Which GTA games does it support?</h1>
+                <p>This mod Only Support <strong>GTA San-Andreas</strong> for now.</p>
+                <h1 id="which-versions-of-the-games-does-it-support">Which versions of the games does it support?</h1>
+                <p><strong>GTA San Andreas</strong>: v1.0 US </p>
+                <h1 id="how-do-i-downgrade-my-game-to-the-required-version">How do I downgrade my game to the required
+                  version?</h1>
+                <p>There&#39;s a San Andreas downgrader by gamerzworld in the GTAForums here:<br><a
+                    href="https://gtaforums.com/topic/927016-san-andreas-downgrader/">https://gtaforums.com/topic/927016-san-andreas-downgrader/</a>
+                </p>
+                <h1 id="what-asi-loader-is-recommended-to-play-the-mod-with">What ASI Loader is recommended to play the
+                  mod with?</h1>
+                <p>I <strong>highly</strong> recommend using the <a
+                    href="https://github.com/ThirteenAG/Ultimate-ASI-Loader">Ultimate ASI Loader</a> by <a
+                    href="https://github.com/ThirteenAG">ThirteenAG</a> purely due to the fact that it supports saving
+                  CrashDumps.</p>
+                <p>You can find the latest release here: <a
+                    href="https://github.com/ThirteenAG/Ultimate-ASI-Loader/releases/latest">https://github.com/ThirteenAG/Ultimate-ASI-Loader/releases/latest</a>
+                </p>
+                <p>Download the <code>Ultimate-ASI-Loader.zip</code> file (not the <code>_x64.zip</code> one)<br>It will
+                  contain a file called <code>dinput8.dll</code> - move the file to your GTA directory.<br>Now rename it
+                  to <code>vorbisFile.dll</code> and replace the original.<br>(Good for people that use the
+                  <code>dinput8.dll</code> mouse fix. Also the only way I personally got the ASI Loader to work)</p>
+                <p>Silent&#39;s ASI Loader works as well, but if you want to open an issue with some crashes I&#39;ll be
+                  closing any that do not have crash dumps.</p>
+                <p>Depending on which ASI Loader you picked, the files differ in size a bit:</p>
+                <ul>
+                  <li><code>vorbisFile.dll</code> (Ultimate ASI Loader): 2,102KB / 2,152,448 bytes</li>
+                  <li><code>vorbisFile.dll</code> (Silent&#39;s ASI Loader): 53KB / 53,760 bytes</li>
+                </ul>
+                <p>The reason why the Ultimate ASI Loader is <strong>WAY BIGGER</strong> in size is because it supports
+                  more than just the original <code>vorbisFile.dll</code>, comes with an additional windowed mode
+                  feature, a <a href="https://github.com/crosire/d3d8to9">&quot;d3d8 to d3d9&quot; pseudo-driver</a> and
+                  a crash handler.</p>
+                <p>If you don&#39;t need any of that, Silent&#39;s ASI Loader will be all you need.</p>
+                <h1 id="how-do-i-download-the-mod-then">How do I download the mod then?</h1>
+                <p>Head on over to the the <code>Releases</code> tab or <a
+                    href="https://github.com/AthallahDzaki/Trilogy-ASI-Script/releases/latest">click here</a>.</p>
+                <p>Installation is as simple as installing an ASI Loader (see previous section) and copying all the
+                  files into your game directory.</p>
+                <p>To Work with My Custom Effect, you need to download my NodeJS Websocket Server <a
+                    href="https://github.com/AthallahDzaki/Trilogy-Node-Script">here</a> and run it.</p>
+                <h1 id="-and-how-do-i-use-it">... and how do I use it?</h1>
+                <p>Simple:</p>
+                <ol>
+                  <li>Start the game</li>
+                  <li>Run NodeJS Websocket Server</li>
+                </ol>
+                <h1 id="im-getting-an-error-126-when-i-try-to-start-the-game">I&#39;m getting an &quot;Error: 126&quot;
+                  when I try to start the game!</h1>
+                <p>You are most likely missing the DirectX 9 runtime.<br>Please download it from here and then try
+                  starting the game again:</p>
+                <p><a
+                    href="https://www.microsoft.com/en-us/download/details.aspx?id=8109">https://www.microsoft.com/en-us/download/details.aspx?id=8109</a>
+                </p>
+                <p>If that doesn&#39;t fix it then make sure you have the <code>bass.dll</code> in your game
+                  directory.<br>It comes bundled with the Chaos Mod archive you downloaded.</p>
+                <h1 id="is-there-a-list-of-all-effects">Is there a list of all effects?</h1>
+                <p>Of course! Here&#39;s a <a href="http://bit.ly/gta-sa-chaos-mod">spreadsheet</a> that has all of
+                  them! (Old)</p>
+                <h1 id="the-effect-super-hot-isnt-working-correctly">The effect <code>SUPER. HOT.</code> isn&#39;t
+                  working correctly!</h1>
+                <p>It seems that mouse fixes such as <code>dinput8.dll</code> can cause issues with this (and maybe
+                  other) effects.
+                  If you&#39;re playing modded already I <strong>highly</strong> recommend using SilentPatch instead
+                  seeing as it also includes a mouse fix.</p>
+                <h1 id="how-do-i-load-the-last-autosave-when-ingame">How do I load the last autosave when ingame?</h1>
+                <p>Hold down <code>Left CTRL</code> when hovering over the <code>Load Game</code> option in the menu.
+                </p>
+                <h1 id="where-are-the-autosaves-being-saved-to">Where are the autosaves being saved to?</h1>
+                <p>Inside a sub-directory called <code>chaos_mod</code> in your corresponding GTA User Files folder.</p>
+                <h1 id="how-do-i-setup-the-tiktok-voting">How do I setup the Tiktok Voting?</h1>
+                <p>Refer to the NodeJS Websocket Server <a
+                    href="https://github.com/AthallahDzaki/Trilogy-Node-Script">here</a>.</p>
+                <h1 id="my-games-crashing">My game&#39;s crashing!</h1>
+                <p>Great! Create an issue with the <code>.log</code> and <code>.dmp</code> files from the
+                  <code>CrashDumps</code> folder. (Best to archive them into a <code>.zip</code> file or similar)</p>
+                <h1 id="i-have-a-suggestion-for-an-effect">I have a suggestion for an effect!</h1>
+                <p>Also great! Feel free to create an issue with that as well, best to explain what it should do in
+                  detail.</p>
+                <p>If you&#39;re lucky someone might be able to implement it and contribute it to the mod!</p>
+                <p>Or better yet: <strong>Create the effect yourself and do a pull request!</strong></p>
+                <p>That way you are helping with making the mod even better (or worse, depending on how you look at it).
+                </p>
+                <p>Check out the <a href="CONTRIBUTING.md">CONTRIBUTING</a> file for more information.</p>
+                <h1 id="credits">Credits</h1>
+                <h2 id="dk22pac-and-everyone-involved-in-the-plugin-sdk"><a
+                    href="https://github.com/DK22Pac">DK22Pac</a> and everyone involved in the <a
+                    href="https://github.com/DK22Pac/plugin-sdk">plugin-sdk</a></h2>
+                <h2 id="parik"><a href="https://github.com/Parik27">Parik</a></h2>
+                <p>who has been helping me with a <strong>LOT</strong> of things in both the original mod and this
+                  rewrite 💖</p>
+                <h2 id="sa-chaos-1.0">V1.0 SA-CHAOS Tester</h2>
+                <ul>
+                  <li><a href="https://www.tiktok.com/@xfrnknstnx">Frankenstein</a></li>
+                  <li><a href="https://www.tiktok.com/@wdgofficial.id">WDG</a></li>
+                  <li><a href="https://www.tiktok.com/@dinoandreann">DinoAndrean</a></li>
+                </ul>
+                <h2 id="early-v30-beta-testers">Early v3.0 beta testers</h2>
+                <ul>
+                  <li><a href="https://twitch.tv/english_ben">English_Ben</a></li>
+                  <li><a href="https://twitch.tv/hugo_one">hugo_one</a></li>
+                  <li><a href="https://twitch.tv/Joshimuz">Joshimuz</a></li>
+                  <li><a href="https://twitch.tv/Riekelt">Riekelt</a></li>
+                </ul>
+                <h2 id="everyone-in-the-v30-release-race-that-was-held-on-the-9th-of-july-2022">Everyone in the v3.0
+                  release race that was held on the 9th of July, 2022</h2>
+                <p>2D_SVD, Abbygail, BladeXRG, Crucial, DennisOnTheInternet, DoubleDubbel, English_Ben,
+                  Fearful_was_taken, Floh284, GamingMaster,
+                  gian_97, glomerius, Gukol, Husker, Jersukai, Jugachi, Kamikaza404, Kato0909, KinzyKenzie, Kristof,
+                  Kuba4ful, LotsOfS,
+                  LuckyLucketts, MoRTaL, mossfis, Mytherious, Nardiko, NateHotshot, NotCreativeBush, prosto_big,
+                  Riekelt, Rose, Saymite,
+                  Scemmer_Joke, Simbe, SimonDiamond, Stickheadz32, Tepiloxtl, TonyKaatib, Voskos, WaterArko, YPOC,
+                  zoton2</p>
+                <hr>
+                <details>
+                  <summary>v1.0 Credits</summary>
+
+                  <h2 id="early-v10-beta-testers">Early v1.0 beta testers</h2>
+                  <ul>
+                    <li><a href="https://twitch.tv/english_ben">English_Ben</a></li>
+                    <li><a href="https://twitch.tv/gta_madman">GTA_Madman</a></li>
+                    <li><a href="https://twitch.tv/heinki">Heinki</a></li>
+                    <li><a href="https://twitch.tv/joshimuz">Joshimuz</a></li>
+                    <li><a href="https://twitch.tv/jugachi">Jugachi</a></li>
+                    <li><a href="https://twitch.tv/naro">Naro</a></li>
+                    <li><a href="https://twitch.tv/tezur0">Tezur0</a></li>
+                  </ul>
+                  <h2 id="everyone-in-the-v10-release-race-that-was-held-on-the-30th-of-august-2019">Everyone in the
+                    v1.0 release race that was held on the 30th of August, 2019</h2>
+                  <ul>
+                    <li><a href="https://twitch.tv/123robot">123robot</a></li>
+                    <li><a href="https://twitch.tv/domotherussian">DomoTheRussian</a></li>
+                    <li><a href="https://twitch.tv/english_ben">English_Ben</a></li>
+                    <li><a href="https://twitch.tv/gaeldemarseille">Gaël</a></li>
+                    <li><a href="https://twitch.tv/jesseysnipenl">Jessey</a></li>
+                    <li><a href="https://twitch.tv/natehotshot">Nate</a></li>
+                    <li><a href="https://twitch.tv/pizzafourlife">PizzaFourLife</a></li>
+                    <li><a href="https://twitch.tv/rok_24">RoK</a></li>
+                    <li><a href="https://twitch.tv/spug3">SpuG3</a></li>
+                    <li><a href="https://twitch.tv/terrtail">Terrtail</a></li>
+                    <li><a href="https://twitch.tv/zoton2">zoton2</a></li>
+                    <li><a href="https://twitch.tv/wariscoach">wariscoach</a>
+                </details>
+                </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </div>
+        <footer>
+          <div class="footer clearfix mb-0 text-muted">
+            <div class="float-start">
+              <p>2023 &copy; Mazer</p>
+            </div>
+            <div class="float-end">
+              <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
+                by <a href="https://saugi.me">Saugi</a></p>
+            </div>
+          </div>
+        </footer>
+      </div>
+  </div>
+  <script src="assets/static/js/components/dark.js"></script>
+  <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+  <script src="assets/compiled/js/app.js"></script>
+</body>
+
+</html>

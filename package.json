@@ -14,7 +14,8 @@
   "description": "Binding For Tiktok and Chaos Mod",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.js"
+    "start" : "node index.js",
+    "config-web": "cd settings_page && npm i && start http://localhost:3000 && npm start"
   },
   "keywords": [
     "chaos",
