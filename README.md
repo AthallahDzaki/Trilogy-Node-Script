@@ -6,6 +6,11 @@ FOR BEST PERFORMANCE, USE [My Port Chaos Mod](https://github.com/AthallahDzaki/T
 
 The only difference is in the game memory checking system so that it does not send packets when in the initial menu.
 
+## Download
+
+Click <b>GREEN!</b> (CODE) button and click Download ZIP.
+or you can clone this repo with git clone [https://](https://github.com/AthallahDzaki/Trilogy-Node-Script)
+
 ## Getting Started (Normal Mode)
 
 1. Prerequire
@@ -13,7 +18,7 @@ The only difference is in the game memory checking system so that it does not se
   
 2. Run 
 ```
-double click on start-server.bat
+double click on start-server.bat (Run As Admin for First Time Install)
 ```
 
 Note: (Only for Non Tikfinity)
