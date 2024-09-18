@@ -14,7 +14,8 @@ or you can clone this repo with git clone https://github.com/AthallahDzaki/Trilo
 ## Getting Started (Normal Mode)
 
 1. Prerequire
-- Tikfinity (Recommended)
+- Indofinity (ID Region Recomended)
+- Tikfinity (Other Region Recommended)
   
 2. Run 
 ```
