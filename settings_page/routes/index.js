@@ -57,7 +57,7 @@ router.post('/handle-tiktok-config', function(req, res, next) {
   if(req.body["enable-vote"] != undefined)
     Tiktok.TiktokVoteEnable = req.body["enable-vote"] === 'true';
   if(req.body["vote-cooldown"] != undefined)
-    Tiktok.TiktokVoteCooldown = req.body["vote-cooldown"];
+    Tiktok.TiktokVoteCooldown = parseInt(req.body["vote-cooldown"]);
   if(req.body["enable-force-effect"] != undefined)
     Tiktok.TiktokForceEffect = req.body["enable-force-effect"] === 'true';
   if(req.body["enable-indofinity"] != undefined)
@@ -71,13 +71,13 @@ router.post('/handle-general-config', function(req, res, next) {
   let Config = JSON.parse(fs.readFileSync(__dirname + "/../../config.json", "utf8"));
   let General = Config.General;
   if(req.body["port"] != undefined)
-    General.GUIWebsocketPort = req.body["port"];
+    General.GUIWebsocketPort = parseInt(req.body["port"]);
   if(req.body["cooldown"] != undefined)
-    General.Cooldown = req.body["cooldown"];
+    General.Cooldown = parseInt(req.body["cooldown"]);
   if(req.body["duration"] != undefined)
-    General.EffectDuration = req.body["duration"];
+    General.EffectDuration = parseInt(req.body["duration"]);
   if(req.body["seed"] != undefined)
-    General.Seed = req.body["seed"];
+    General.Seed = parseInt(req.body["seed"]);
   Config.General = General;
   fs.writeFileSync(__dirname + "/../../config.json", JSON.stringify(Config, null, 4), "utf8");
   res.json({status: "success"});
