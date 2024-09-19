@@ -35,7 +35,7 @@ import { sleep, findRunningProcess } from "./function/utils.js";
 import { GeneralConfig } from "./shared/shared.js";
 import { API } from "./function/api.js";
 
-let wsServer = new WebSocketServer({ port: GeneralConfig.General.WebSocketGUIPort || 42069 });
+let wsServer = new WebSocketServer({ port: GeneralConfig.General.GUIWebsocketPort || 42069 });
 
 console.log("Server Started!");
 
@@ -90,6 +90,8 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
 
     let cooldown = GeneralConfig.General.Cooldown || 30000;
     let remaining = cooldown;
+
+    ValidateConfig(GeneralConfig);
 
     let loading = ora("Waiting GTA SA to Start"),
         loadingDone = false;
@@ -158,3 +160,46 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
         }
     }, 10);
 })();
+
+function ValidateConfig(config) {
+
+    let isThisNumber = (value) => {
+        return value instanceof Number || typeof value === "number";
+    }
+
+    if(!isThisNumber(config.General.GUIWebsocketPort)) {
+        console.log("GUI Websocket Port is not a number!");
+        console.log("Please reconfigure at the website!");
+        exit();
+    }
+
+    if(!isThisNumber(config.General.Seed) && config.General.Seed != null) {
+        console.log("Seed is not a number!");
+        console.log("Please reconfigure at the website!");
+        exit();
+    }
+
+    if(!isThisNumber(config.General.Cooldown)) {
+        console.log("Cooldown is not a number!");
+        console.log("Please reconfigure at the website!");
+        exit();
+    }
+
+    if(!isThisNumber(config.General.EffectDuration)) {
+        console.log("Effect Duration is not a number!");
+        console.log("Please reconfigure at the website!");
+        exit();
+    }
+
+    if(!isThisNumber(config.RapidFire.RapidFireEffectDuration)) {
+        console.log("Rapid Fire Duration is not a number!");
+        console.log("Please reconfigure at the website!");
+        exit();
+    }
+
+    if(!isThisNumber(config.Tiktok.TiktokVoteCooldown)) {
+        console.log("Tiktok Vote Cooldown is not a number!");
+        console.log("Please reconfigure at the website!");
+        exit();
+    }
+}
