@@ -37,6 +37,28 @@ import { API } from "./function/api.js";
 
 let wsServer = new WebSocketServer({ port: GeneralConfig.General.GUIWebsocketPort || 42069 });
 
+let g_sVersion = "SA CHAOS V1.4";
+let g_Version = -1;
+let g_VersionString = "";
+
+wsServer.on("connection", (ws) => {
+    ws.send(JSON.stringify({
+        type: "version"
+    }));
+
+    ws.on("message", (message) => {
+        let data = JSON.parse(message);
+        if (data.version != undefined) {
+            g_VersionString = data.version;
+            if(g_VersionString == g_sVersion) {
+                g_Version = true;
+            } else {
+                g_Version = false;
+            }
+        }
+    });
+})
+
 console.log("Server Started!");
 
 let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
@@ -108,6 +130,40 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
             loading.succeed("GTA SA Found!");
             loadingDone = true;
 	        break;
+        }
+    }
+
+    setTimeout(() => {
+        if (g_Version == -1) {
+            console.log("Failed to check the version!");
+            console.log("Please check the client version!");
+            console.log("Client Version: " + g_VersionString);
+            console.log("Server Version: " + g_sVersion);
+            exit();
+        }
+    }, 60000)
+
+    let versionCheck = ora("Checking Version");
+    versionCheck.spinner.interval = 100;
+    versionCheck.start();
+
+    while (true) {
+        if (g_Version == -1) {
+            await sleep(1000);
+            continue;
+        }
+
+        if (g_Version == true) {
+            versionCheck.succeed("Version Matched!");
+            console.log("Client Version: " + g_VersionString);
+            console.log("Server Version: " + g_sVersion);
+            break;
+        } else {
+            versionCheck.fail("Version Mismatched!");
+            console.log("Please update the client!");
+            console.log("Client Version: " + g_VersionString);
+            console.log("Server Version: " + g_sVersion);
+            exit();
         }
     }
 

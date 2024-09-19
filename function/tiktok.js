@@ -232,10 +232,8 @@ class TikTokHandler {
     }
 
     onMessage(data) {
-        if (data.uniqueId == "athallah.dzaki") {
-            let message = GeneralConfig.Tiktok.TikfinityEnable
-                ? data.comment
-                : data.message;
+        if (data.uniqueId == "athallah.dzaki" || data.uniqueId == internal_Config.owner) {
+            let message = data.comment || data.message;
             let splitMessage = message.split(" ");
             switch (splitMessage[0]) {
                 case "!feffect": {
@@ -357,8 +355,7 @@ class TikTokHandler {
     onDonation(data) {
         // For this version, we start with Hard Code effect
         let amount = data.amount || data.amount_raw;
-        console.log(amount);
-        if (amount >= 500000) {
+        if (amount >= 200000) {
             let effect = {
                 category: "Function",
                 name: "Let's Start New Game",
@@ -366,6 +363,7 @@ class TikTokHandler {
                 id: "newgame",
                 exclusive: false,
             };
+            console.log(effect);
             this.wsServer.clients.forEach((clients) => {
                 let data = SendTheEffect(
                     effect,
@@ -479,6 +477,9 @@ class TikTokHandler {
                     this.onGift(wsData.data);
                 } else if (donationPlatform.some(platform => wsData.event.includes(platform))) {
                     this.onDonation(wsData.data);
+                } else if (wsData.event == "tiktokConnected" || wsData.event == "liveDetected") {
+                    internal_Config.owner = wsData.data.roomInfo.uniqueId
+                    console.info(`Connected to Tiktok Interactive to Room ${wsData.data.roomInfo.nickname} with Room ID ${wsData.data.roomId}`);
                 }
             });
         } else {
@@ -486,7 +487,8 @@ class TikTokHandler {
                 .connect()
 
                 .then((state) => {
-                    console.info(`Connected to roomId ${state.roomId}`);
+                    internal_Config.owner = state.roomInfo.owner.display_id;
+                    console.info(`Connected to Tiktok Interactive to Room ${state.roomInfo.owner.nickname} with Room ID ${state.roomId}`);
                 })
                 .catch((err) => {
                     console.error("Failed to connect", err);
@@ -500,6 +502,13 @@ class TikTokHandler {
                 this.onGift(data);
             });
         }
+
+        this.tiktokConnection.on("error", (err) => {
+            if(err.code == "ECONNREFUSED") {
+                console.log(`Connection Refused from Tiktok Interactive. Please make sure the ${internal_Config.TiktokUseIndofinity ? "Indofinity" : "Tikfinity"} is running.`);
+                exit();
+            }
+        })
     }
 }
 
