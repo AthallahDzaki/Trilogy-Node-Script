@@ -1160,21 +1160,21 @@
             "category" : "CustomEffects_Generic",
             "name" : "Frankenste In Here",
             "description" : "FrankensteinHere",
-            "id" : "effect_texture_frankenstein",
+            "id" : "texture_frankenstein",
             "exclusive" : false
         },
         {
             "category" : "CustomEffects_Generic",
             "name" : "WDG Has Been Here",
             "description" : "WDGHasBeenHere",
-            "id" : "effect_texture_wdg",
+            "id" : "texture_wdg",
             "exclusive" : false
         },
         {
             "category" : "CustomEffects_Generic",
             "name" : "Dino Andrean..... Rawrrrr",
             "description" : "DinoAndreanRawrrrr",
-            "id" : "effect_texture_dinoandrean",
+            "id" : "texture_dinoandrean",
             "exclusive" : false
         },
         {
