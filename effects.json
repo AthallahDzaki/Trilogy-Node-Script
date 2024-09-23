@@ -1733,7 +1733,7 @@
             "category" : "CustomEffects_NPCs",
             "name" : "Remove All Angry Hobo",
             "description" : "HoboEradication",
-            "id" : "effect_remove_all_angry_hobo",
+            "id" : "remove_all_angry_hobo",
             "exclusive": true
         },
         {
@@ -1754,7 +1754,7 @@
             "category": "CustomEffects_NPCs",
             "name" : "remove Farthest Angry Hobo",
             "description" : "ThisHoboNotRendered",
-            "id" : "effect_remove_farthest_angry_hobo",
+            "id" : "remove_farthest_angry_hobo",
             "exclusive": true
         },
         {

@@ -239,7 +239,7 @@ class TikTokHandler {
                 case "!feffect": {
                     let effect = {
                         category: "Function",
-                        name: "Dev Check Spawn " + splitMessage[1],
+                        name: "Dev Check Effect " + splitMessage[1],
                         description: "Dev Check",
                         id: splitMessage[1],
                         exclusive: false,

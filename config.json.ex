@@ -3,7 +3,7 @@
         "GUIWebsocketPort": 42069,
         "Cooldown": 30000,
         "EffectDuration": 30000,
-        "Seed": ""
+        "Seed": null
     },
 
     "RapidFire" :{
