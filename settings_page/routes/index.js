@@ -20,6 +20,10 @@ router.get('/gift-config', function(req, res, next) {
   res.render('pages/gift-config', { title: 'Gift Config', page : 'gift-config' });
 })
 
+router.get('/new-gift-config', function(req, res, next) {
+  res.render('pages/new-gift-config', { title: 'New Gift Config', page : 'new-gift-config' });
+})
+
 router.get('/config', function(req, res, next) {
   let Config = JSON.parse(fs.readFileSync(__dirname + "/../../config.json", "utf8"));
   res.json(Config);
@@ -82,6 +86,10 @@ router.post('/handle-general-config', function(req, res, next) {
   fs.writeFileSync(__dirname + "/../../config.json", JSON.stringify(Config, null, 4), "utf8");
   res.json({status: "success"});
 });
+
+router.post('/handle-new-gift-config', function(req, res, next) {
+  
+})
 
 router.post('/handle-gift-config', function(req, res, next) {
   let Gifts = JSON.parse(fs.readFileSync(__dirname + "/../../gifts.json", "utf8"));
