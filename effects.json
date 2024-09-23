@@ -1719,7 +1719,7 @@
             "category": "CustomEffects_NPCs",
             "name": "Move All Angry Hobo to Player",
             "description": "AngryHoboGotMagicWand",
-            "id": "move_all_angry_hobo_to_player",
+            "id": "move_all_angry_hobo_to_you",
             "exclusive": true
         },
         {
