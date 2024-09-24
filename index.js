@@ -107,7 +107,6 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
     let effectDataBase = readFileSync("./effects.json", "utf8");
 
     userSeed = GeneralConfig.General.Seed || GenerateSeed();
-    console.log(`Seed: ${userSeed}`);
     rngInstance = xoroshiro128plus(userSeed, 16);
 
     let cooldown = GeneralConfig.General.Cooldown || 30000;
@@ -165,6 +164,13 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
             console.log("Server Version: " + g_sVersion);
             exit();
         }
+    }
+
+    if (GeneralConfig.General.Seed == null) {
+        setInterval(() => {
+            userSeed = GenerateSeed();
+            rngInstance = xoroshiro128plus(userSeed, 16);
+        }, 1000); // Make Seed Random every 1 second
     }
 
     if(GeneralConfig.Tiktok.TiktokEnable) {
