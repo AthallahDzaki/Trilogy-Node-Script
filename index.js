@@ -264,4 +264,6 @@ function ValidateConfig(config) {
         console.log("Please reconfigure at the website!");
         exit();
     }
+
+    config.GeneralConfig.Seed = null; // Force It To Be Null (For Now)
 }
