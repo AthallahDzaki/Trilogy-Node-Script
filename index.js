@@ -37,7 +37,7 @@ import { API } from "./function/api.js";
 
 let wsServer = new WebSocketServer({ port: GeneralConfig.General.GUIWebsocketPort || 42069 });
 
-let g_sVersion = "SA CHAOS V1.4";
+let g_sVersion = "SA CHAOS V1.5";
 let g_Version = -1;
 let g_VersionString = "";
 
@@ -159,7 +159,7 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
             break;
         } else {
             versionCheck.fail("Version Mismatched!");
-            console.log("Please update the client!");
+            console.log("Please update the client or server!");
             console.log("Client Version: " + g_VersionString);
             console.log("Server Version: " + g_sVersion);
             exit();
