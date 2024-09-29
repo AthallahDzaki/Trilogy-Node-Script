@@ -265,5 +265,5 @@ function ValidateConfig(config) {
         exit();
     }
 
-    config.GeneralConfig.Seed = null; // Force It To Be Null (For Now)
+    config.General.Seed = null; // Force It To Be Null (For Now)
 }
