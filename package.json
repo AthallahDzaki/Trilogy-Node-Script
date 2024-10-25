@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "axios": "^1.7.4",
+    "axios": "^1.7.7",
     "cors": "^2.8.5",
     "diff": "^6.0.0-beta",
     "express": "^4.19.2",
@@ -14,8 +14,9 @@
   "description": "Binding For Tiktok and Chaos Mod",
   "main": "index.js",
   "scripts": {
-    "start" : "node index.js",
-    "config-web": "cd settings_page && npm i && start http://localhost:3000 && npm start"
+    "start": "npm i && node index.js",
+    "config-web": "cd settings_page && npm i && start http://localhost:3000 && npm start",
+    "spin-wheel": "cd Spinning-Wheel && npm i && start http://localhost:7030 && npm start"
   },
   "keywords": [
     "chaos",

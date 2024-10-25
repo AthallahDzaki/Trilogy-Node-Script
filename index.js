@@ -37,27 +37,9 @@ import { API } from "./function/api.js";
 
 let wsServer = new WebSocketServer({ port: GeneralConfig.General.GUIWebsocketPort || 42069 });
 
-let g_sVersion = "SA CHAOS V1.5";
+let g_sVersion = "SA CHAOS V1.6";
 let g_Version = -1;
 let g_VersionString = "";
-
-wsServer.on("connection", (ws) => {
-    ws.send(JSON.stringify({
-        type: "version"
-    }));
-
-    ws.on("message", (message) => {
-        let data = JSON.parse(message);
-        if (data.version != undefined) {
-            g_VersionString = data.version;
-            if(g_VersionString == g_sVersion) {
-                g_Version = true;
-            } else {
-                g_Version = false;
-            }
-        }
-    });
-})
 
 console.log("Server Started!");
 
@@ -131,6 +113,40 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
 	        break;
         }
     }
+
+    wsServer.on("connection", (ws) => {
+        ws.send(JSON.stringify({
+            type: "version"
+        }));
+    
+        ws.on("message", (message) => {
+            let data = JSON.parse(message);
+    
+            if (data.version != undefined) {
+                g_VersionString = data.version;
+                if(g_VersionString == g_sVersion) {
+                    g_Version = true;
+                } else {
+                    g_Version = false;
+                }
+            } else if (data.name != undefined) {
+                if (data.name == "effect") {
+                    let effect = JSON.parse(effectDataBase)[
+                        "Function"
+                    ].find((x) => x.id == data.data.id);
+                    if (effect == undefined) return; // How this possible?
+                    wsServer.clients.forEach((clients) => {
+                        let data = SendTheEffect(
+                            effect,
+                            userSeed,
+                            rngInstance
+                        );
+                        clients.send(JSON.stringify(data));
+                    });
+                }
+            }
+        });
+    });
 
     setTimeout(() => {
         if (g_Version == -1) {

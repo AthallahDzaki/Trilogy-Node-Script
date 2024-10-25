@@ -1223,5 +1223,30 @@
         "id": 12210,
         "name": "Rosie the Rose Bean",
         "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/3cbaea405cc61e8eaab6f5a14d127511.png~tplv-obj.webp"
+    },
+    {
+        "id": 12469,
+        "name": "Farm",
+        "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/947ca10e2c35d104f08e4fe80e2646bf.png~tplv-obj.webp"
+    },
+    {
+        "id": 12470,
+        "name": "Blow Bubbles",
+        "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/3119f192f98539b3d58c12b195811ca5.PNG~tplv-obj.webp"
+    },
+    {
+        "id": 12406,
+        "name": "Luxury Yacht",
+        "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/319e249c61f0184ea2bebde102c818f2.png~tplv-obj.webp"
+    },
+    {
+        "id": 12404,
+        "name": "Tom's Love",
+        "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/0934cee15aedbdb396d090c06b7fcfc4.png~tplv-obj.webp"
+    },
+    {
+        "id": 12405,
+        "name": "Magic Blast",
+        "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/0efeb08c3d83d803eb80f2efb6610a96.png~tplv-obj.webp"
     }
 ]

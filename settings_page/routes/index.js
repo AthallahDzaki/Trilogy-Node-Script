@@ -24,6 +24,10 @@ router.get('/new-gift-config', function(req, res, next) {
   res.render('pages/new-gift-config', { title: 'New Gift Config', page : 'new-gift-config' });
 })
 
+router.get('/spinwheel-config', function(req, res, next) {
+  res.render('pages/spinwheel-config', { title: 'Spinwheel Config', page : 'spinwheel-config' });
+})
+
 router.get('/config', function(req, res, next) {
   let Config = JSON.parse(fs.readFileSync(__dirname + "/../../config.json", "utf8"));
   res.json(Config);
@@ -37,6 +41,18 @@ router.get('/gifts', function(req, res, next) {
   })
   res.json(Gifts);
 });
+
+router.get('/spinnwheel-effects', function(req, res, next) {
+  if(fs.existsSync(__dirname + "/../../spinwheel-effects.json") && fs.readFileSync(__dirname + "/../../spinwheel-effects.json", "utf8") != "{}") {
+    let Effects = JSON.parse(fs.readFileSync(__dirname + "/../../spinwheel-effects.json", "utf8"));
+    res.json(Effects);
+  } else if (JSON.parse(fs.readFileSync(__dirname + "/../../spinwheel-effects.json", "utf8")) == {}) {
+    res.json({status: "error", message: "Effects not found"});
+  }
+  else {
+    res.json({status: "error", message: "Spinwheel effects not found"});
+  }
+})
 
 router.get('/effects', function(req, res, next) {
   let Effects = JSON.parse(fs.readFileSync(__dirname + "/../../effects.json", "utf8"));
@@ -89,6 +105,12 @@ router.post('/handle-general-config', function(req, res, next) {
 
 router.post('/handle-new-gift-config', function(req, res, next) {
   
+})
+
+router.post('/handle-spinwheel-config', function(req, res, next) {
+  let Effects = JSON.parse(req.body["effects"]);
+  fs.writeFileSync(__dirname + "/../../spinwheel-effects.json", JSON.stringify({effects: Effects}, null, 4), "utf8");
+  res.json({status: "success"});
 })
 
 router.post('/handle-gift-config', function(req, res, next) {

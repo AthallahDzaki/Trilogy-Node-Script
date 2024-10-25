@@ -74,15 +74,25 @@
                     </a>
                 </li>
                 <% if (page == "gift-config") { %>
-                    <li class="sidebar-item active">
-                    <% } else { %>
-                    <li class="sidebar-item">
-                    <% } %>
-                        <a href="gift-config" class='sidebar-link'>
-                            <i class="fas fa-gift"></i>
-                            <span>Gift Config</span>
-                        </a>
-                    </li>
+                <li class="sidebar-item active">
+                <% } else { %>
+                <li class="sidebar-item">
+                <% } %>
+                    <a href="gift-config" class='sidebar-link'>
+                        <i class="fas fa-gift"></i>
+                        <span>Gift Config</span>
+                    </a>
+                </li>
+                <% if (page == "spinwheel-config") { %>
+                <li class="sidebar-item active">
+                <% } else { %>
+                <li class="sidebar-item">
+                <% } %>
+                    <a href="spinwheel-config" class='sidebar-link'>
+                        <i class="fas fa-random"></i>
+                        <span>Spin Wheel Config</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

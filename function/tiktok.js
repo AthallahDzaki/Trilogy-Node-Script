@@ -4,6 +4,7 @@ import { exit } from "process";
 import { SendTheEffect, GenerateRandom } from "./random.js";
 import { eVotingMode, ePickedVote, GeneralConfig } from "../shared/shared.js";
 import fs from "fs";
+import axios from "axios";
 
 let internal_Config = GeneralConfig.Tiktok;
 
@@ -372,6 +373,11 @@ class TikTokHandler {
                 );
                 clients.send(JSON.stringify(data));
             });
+        }
+
+        if (amount == 10000) {
+            axios.get("http://localhost:7030");
+            console.log("Send Wheel of Fortune");
         }
 
         return;
