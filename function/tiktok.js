@@ -379,7 +379,7 @@ class TikTokHandler {
             });
         }
 
-        if (amount == 10000) {
+        if (amount == 5000) {
             axios.get("http://localhost:7030/effect");
             console.log("Send Wheel of Fortune");
         }
