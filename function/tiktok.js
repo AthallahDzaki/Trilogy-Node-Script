@@ -270,6 +270,10 @@ class TikTokHandler {
                     });
                     break;
                 }
+                case "!dospin": {
+                    axios.get("http://localhost:7030/effect");
+                    break;
+                }
                 case "!checkveh": {
                     let tmp_data = {
                         category: "Vehicle",
@@ -376,7 +380,7 @@ class TikTokHandler {
         }
 
         if (amount == 10000) {
-            axios.get("http://localhost:7030");
+            axios.get("http://localhost:7030/effect");
             console.log("Send Wheel of Fortune");
         }
 

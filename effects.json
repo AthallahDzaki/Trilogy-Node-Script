@@ -288,6 +288,13 @@
             "exclusive": false
         },
         {
+            "category": "WeaponsAndHealth",
+            "name": "Spawn Rocket",
+            "description": "SpawnRocket",
+            "id": "spawn_rocket",
+            "exclusive": false
+        },
+        {
             "category": "Stats",
             "name": "Beginner Weapon Skills",
             "description": "BabysFirstGun",
