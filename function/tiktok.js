@@ -380,8 +380,9 @@ class TikTokHandler {
         }
 
         if (amount == 5000) {
-            axios.get("http://localhost:7030/effect");
-            console.log("Send Wheel of Fortune");
+                axios.get("http://localhost:7030/effect").catch(e => console.log("Failed to Send to Wheel of Fortune", e.code));
+                console.log("Send Wheel of Fortune");
+            
         }
 
         return;

@@ -2,6 +2,7 @@
 
 
 COPY gifts.json gifts.json.bak
+COPY spinwheel-effects.json spinwheel-effects.json.bak
 
 where git > nul 2>&1 && (
     IF EXIST .git (
@@ -15,3 +16,4 @@ where git > nul 2>&1 && (
 echo DONE > migrate.txt
 
 COPY gifts.json.bak gifts.json
+COPY spinwheel-effects.json.bak spinwheel-effects.json
