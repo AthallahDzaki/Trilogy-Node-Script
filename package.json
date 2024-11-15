@@ -16,7 +16,7 @@
   "scripts": {
     "start": "npm i && node index.js",
     "config-web": "cd settings_page && npm i && start http://localhost:3000 && npm start",
-    "spin-wheel": "cd Spinning-Wheel && npm i && start http://localhost:7030 && npm start"
+    "spin-wheel": "cd Spinning-Wheel && npm i && start http://localhost && npm start"
   },
   "keywords": [
     "chaos",
