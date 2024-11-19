@@ -271,7 +271,7 @@ class TikTokHandler {
                     break;
                 }
                 case "!dospin": {
-                    axios.get("http://localhost/effect");
+                    axios.get("http://localhost/effect").catch(e => console.log("Failed to Send to Wheel of Fortune", e.code));
                     break;
                 }
                 case "!checkveh": {
