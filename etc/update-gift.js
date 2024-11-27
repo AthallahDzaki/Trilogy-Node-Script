@@ -2,7 +2,7 @@ import axios from "axios";
 import { readFileSync, writeFileSync } from "fs";
 
 (async () => {
-    let gift = await axios.get("http://2.node.run.place:7010/");
+    let gift = await axios.get("https://indofinity.com/api/v1/gifts?username=xfrnknstnx");
     /*
     {
         "id": 10874,
@@ -13,7 +13,7 @@ import { readFileSync, writeFileSync } from "fs";
     */
     let ourGift = JSON.parse(readFileSync("./gifts.json", "utf8"));
     let ourGiftImage = JSON.parse(readFileSync("./gift-img.json", "utf8"));
-    let giftData = gift.data;
+    let giftData = gift.data.data;
     giftData.forEach((element) => {
         let contex = {
             id: element.id,
@@ -41,7 +41,7 @@ import { readFileSync, writeFileSync } from "fs";
             ourGiftImage.push({
                 id: element.id,
                 name: element.name,
-                image: element.image.url_list[0]
+                image: element.image
             });
         }
     })
