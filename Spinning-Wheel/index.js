@@ -1,3 +1,5 @@
+console.log("OKE GUYS")
+
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -24,10 +26,22 @@ const ws = new WsReconnect();
 
 ws.open(`ws://localhost:${config.General.GUIWebsocketPort}`);
 
+ws.on('open', function open() {
+    console.log("Cnnected to Server");
+});
+
+ws.on('error', (e) => {
+    if(e.code != 'ECONNREFUSED')
+        console.log(e);
+})
+
 ws.on('close', () => {
   console.log('Connection closed');
 })
 
+ws.on('reconnect', function open() {
+    console.log("Reconnecting to Chaos Server");
+});
 
 // error handler
 app.use(function(err, req, res, next) {
