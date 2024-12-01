@@ -452,7 +452,7 @@ export function GenerateRandom(
         effect.category == "Vehicle"
             ? "Spawn " + effect.id == -1 ? "Random Vehicle" : vehicleName[effect.id - 400]
             : effect.category == "Teleportation"
-            ? "Teleport To " + effect.name
+            ? "" + effect.name
             : effect.name;
     // Then We Take The Description
     let description = effect.description || "No Description Provided";
@@ -518,6 +518,7 @@ export function GenerateRandomVehicle(rngInstance) {
 
 export function SendTheEffect(effect, userSeed, rngInstance) {
     let data = {};
+    console.log(effect)
     switch (effect.category) {
         case "Vehicle": {
             if(effect.id.includes("effect_"))
@@ -579,9 +580,9 @@ export function SendTheEffect(effect, userSeed, rngInstance) {
                         data: {
                             effectID: "effect_fake_teleport",
                             effectData: {
-                                posX: location.posX,
-                                posY: location.posY,
-                                posZ: location.posZ,
+                                posX: location.x,
+                                posY: location.y,
+                                posZ: location.z,
                             },
                             duration: GeneralConfig.General.EffectDuration,
                             displayName: location.name,
@@ -615,9 +616,9 @@ export function SendTheEffect(effect, userSeed, rngInstance) {
                         data: {
                             effectID: "effect_teleport",
                             effectData: {
-                                posX: location.posX,
-                                posY: location.posY,
-                                posZ: location.posZ,
+                                posX: location.x,
+                                posY: location.y,
+                                posZ: location.z,
                             },
                             duration: GeneralConfig.General.EffectDuration,
                             displayName: location.name,
