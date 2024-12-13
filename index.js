@@ -37,7 +37,7 @@ import { API } from "./function/api.js";
 
 let wsServer = new WebSocketServer({ port: GeneralConfig.General.GUIWebsocketPort || 42069 });
 
-let g_sVersion = "SA CHAOS V1.6";
+let g_sVersion = "SA CHAOS V1.6.1";
 let g_Version = -1;
 let g_VersionString = "";
 
@@ -221,7 +221,7 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
                     clients.send(JSON.stringify(data));
                 });
             } else {
-                remaining -= 10;
+                remaining -= 1000 / 24;
                 wsServer.clients.forEach((clients) => {
                     clients.send(
                         JSON.stringify({
@@ -236,7 +236,7 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
                 });
             }
         }
-    }, 10);
+    }, 1000 / 24);
 })();
 
 function ValidateConfig(config) {

@@ -1996,6 +1996,20 @@
         },
         {
             "category": "CustomEffects_Player",
+            "name": "Sadbor Dance (Short)",
+            "description": "SadborShort",
+            "id": "sadbor_dance_short",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Player",
+            "name": "Sadbor Dance (Long)",
+            "description": "SadborLong",
+            "id": "sadbor_dance_long",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Player",
             "name": "Forced Look Behind",
             "description": "EyesInTheBack",
             "id": "forced_look_behind",

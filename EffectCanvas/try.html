@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Canvas Block Model</title>
+</head>
+<body>
+  <canvas id="frameCanvas"></canvas>
+  <script>
+    const canvas = document.getElementById('frameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Set canvas size to match screen size
+    canvas.width = window.innerWidth * 0.95; // 95% of the screen width
+    canvas.height = window.innerHeight * 0.9; // 90% of the screen height
+
+    const padding = 40; // Increased padding for spacing between blocks
+    const rows = 3; // Number of rows
+    const cols = 4; // Number of columns
+    const blockWidth = (canvas.width - padding * (cols + 1)) / cols; // Smaller initial width
+    const blockHeight = (canvas.height - padding * (rows + 1)) / rows; // Smaller initial height
+
+    const blockColor = '#f0f0f0';
+    const textColor = '#000';
+    const font = '18px Arial';
+
+    const images = []; // Array to store loaded images
+
+    // Preload images from Picsum
+    for (let i = 0; i < rows * cols; i++) {
+      const img = new Image();
+      img.src = `https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/3f02fa9594bd1495ff4e8aa5ae265eef~tplv-obj.webp`;
+      images.push(img);
+    }
+
+    let scaleFactor = 1; // Current scaling factor
+    let growing = true; // Animation state (growing or shrinking)
+    const maxScale = 1.2; // Maximum scale factor
+    const minScale = 1; // Minimum scale factor
+    const animationSpeed = 0.005; // Slower animation speed
+
+    function drawBlock(x, y, text, scale, img) {
+      const scaledWidth = blockWidth * scale;
+      const scaledHeight = blockHeight * scale;
+      const offsetX = (blockWidth - scaledWidth) / 2;
+      const offsetY = (blockHeight - scaledHeight) / 2;
+
+      // Draw block background
+      ctx.fillStyle = blockColor;
+      ctx.fillRect(x + offsetX, y + offsetY, scaledWidth, scaledHeight);
+
+      // Draw image (if loaded)
+      const imgSize = Math.min(scaledWidth, scaledHeight) * 0.4; // Scale image size
+      if (img.complete) {
+        const imgX = x + offsetX + padding / 2;
+        const imgY = y + offsetY + (scaledHeight - imgSize) / 2; // Center vertically
+        ctx.drawImage(img, imgX, imgY, imgSize, imgSize);
+      }
+
+      // Draw text
+      ctx.fillStyle = textColor;
+      ctx.font = font;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      const textX = x + offsetX + scaledWidth * 0.4 + padding / 2; // Position text to the right of the image
+      const textY = y + offsetY + scaledHeight / 2;
+      ctx.fillText(text, textX, textY);
+    }
+
+    function drawFrame() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      let startX = padding;
+      let startY = padding;
+
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const index = row * cols + col;
+          drawBlock(
+            startX + col * (blockWidth + padding),
+            startY + row * (blockHeight + padding),
+            `Spawn Rocket ${index + 1}`,
+            scaleFactor,
+            images[index] // Pass the preloaded image
+          );
+        }
+      }
+    }
+
+    function animate() {
+      if (growing) {
+        scaleFactor += animationSpeed;
+        if (scaleFactor >= maxScale) {
+          growing = false;
+        }
+      } else {
+        scaleFactor -= animationSpeed;
+        if (scaleFactor <= minScale) {
+          growing = true;
+        }
+      }
+
+      drawFrame();
+      requestAnimationFrame(animate);
+    }
+
+    // Start drawing and animating
+    drawFrame();
+    animate();
+
+    // Adjust canvas size and redraw on window resize
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth * 0.95;
+      canvas.height = window.innerHeight * 0.9;
+      drawFrame();
+    });
+  </script>
+</body>
+</html>
