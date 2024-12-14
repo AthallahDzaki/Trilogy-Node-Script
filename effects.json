@@ -1626,6 +1626,13 @@
         },
         {
             "category": "CustomEffects_Objects",
+            "name": "Random Size Objects",
+            "description": "CrazyObject",
+            "id": "object_size_random",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Objects",
             "name": "Tiny Objects",
             "description": "ObjectsAreTiny",
             "id": "object_size_tiny",
