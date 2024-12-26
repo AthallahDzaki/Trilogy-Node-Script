@@ -37,7 +37,7 @@ import { API } from "./function/api.js";
 
 let wsServer = new WebSocketServer({ port: GeneralConfig.General.GUIWebsocketPort || 42069 });
 
-let g_sVersion = "SA CHAOS V1.6.1b";
+let g_sVersion = "SA CHAOS V1.6.1c";
 let g_Version = -1;
 let g_VersionString = "";
 
@@ -121,7 +121,8 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
     
         ws.on("message", (message) => {
             let data = JSON.parse(message);
-    
+            if(data.silentpatch == "true")
+                console.log("Silent Patch Detected, It's Mean Chaos time not same with Game Time. But, it's okay! Dont Delete Silent Patch!");
             if (data.version != undefined) {
                 g_VersionString = data.version;
                 if(g_VersionString == g_sVersion) {
