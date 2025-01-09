@@ -1353,6 +1353,13 @@
             "exclusive": true
         },
         {
+            "category": "CustomEffects_Mission",
+            "name": "Let's Start New Game",
+            "description": "NewGamePlease",
+            "id": "newgame",
+            "exclusive": true
+        },
+        {
             "category": "CustomEffects_Ped",
             "name": "Action Figures",
             "description": "ILikePlayingWithToys",
