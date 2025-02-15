@@ -21,7 +21,11 @@ export async function killProcess(processName) {
 export async function runProcessAndWaitToExit(processName, callback) {
     return new Promise((resolve, reject) => {
         // Spawn Process (Display It)
-        const child = spawn(processName, [], { stdio: "inherit" });
+        const child = spawn(processName, [], { stdio: ["pipe", "inherit", "inherit"] });
+
+        child.stdin.write("OK");
+
+        child.stdin.end();
 
         child.on("error", (err) => {
             reject(err);
