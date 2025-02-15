@@ -30,22 +30,29 @@ import { RapidFire } from './function/rapidfire.js';
 
 import { TikTok } from "./function/tiktok.js";
 
-import { sleep, findRunningProcess } from "./function/utils.js";
+import { 
+    sleep, 
+    findRunningProcess, 
+    SelectGTASA, 
+    killProcess, 
+    runProcessAndWaitToExit 
+} from "./function/utils.js";
 
 import { GeneralConfig } from "./shared/shared.js";
 import { API } from "./function/api.js";
 
 let wsServer = new WebSocketServer({ port: GeneralConfig.General.GUIWebsocketPort || 42069 });
 
-let g_sVersion = "SA CHAOS V1.6.1d";
+let g_sVersion = "SA CHAOS V1.6.1e";
 let g_Version = -1;
 let g_VersionString = "";
 
-console.log("Server Started!");
+console.log("Welcome To SA-CHAOS " + g_sVersion + " By Athallah Dzaki");
 
 let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
 
-(async () => {
+async function StartServer() {
+    console.log("Starting Server...");
     if (argv[2] == "--convert") {
         console.log("Converting...");
         let _convertData = await Convert(readFileSync("./effects.txt", "utf8"));
@@ -84,6 +91,18 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
             console.log("Checked Successfully!");
             exit();
         })
+    }
+
+    if(GeneralConfig.General?.GTA_PATH == "" || GeneralConfig.General?.GTA_PATH == null) {
+        let gtaPath = await SelectGTASA();
+        if(gtaPath == "empty") {
+            GeneralConfig.General.GTA_PATH = "empty";
+        }
+        else {
+            GeneralConfig.General.GTA_PATH = gtaPath.split("\\gta_sa.exe")[0];
+        }
+        writeFileSync("./config.json", JSON.stringify(GeneralConfig, null, 4));
+        console.log("GTA SA Has Been set to: " + GeneralConfig.General.GTA_PATH);
     }
 
     let effectDataBase = readFileSync("./effects.json", "utf8");
@@ -179,7 +198,19 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
             console.log("Please update the client or server!");
             console.log("Client Version: " + g_VersionString);
             console.log("Server Version: " + g_sVersion);
-            exit();
+            if(GeneralConfig.General.GTA_PATH != "empty" && GeneralConfig.General.GTA_PATH != null && GeneralConfig.General.GTA_PATH != "") {
+                await killProcess("gta_sa.exe");
+                let returnDir = process.cwd();
+                process.chdir(GeneralConfig.General.GTA_PATH);
+                await runProcessAndWaitToExit(GeneralConfig.General.GTA_PATH + "\\AutoUpdater.exe", () => {;
+                    process.chdir(returnDir);
+                    StartServer();
+                })
+            } else {
+                console.log("Please update the client manually!");
+                exit();
+            }
+            return;
         }
     }
 
@@ -238,7 +269,9 @@ let userSeed, rngInstance, rapidFireHandler, TiktokHandler;
             }
         }
     }, 1000 / 24);
-})();
+}
+
+StartServer();
 
 function ValidateConfig(config) {
 
