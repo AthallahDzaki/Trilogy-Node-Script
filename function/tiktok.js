@@ -417,6 +417,7 @@ class TikTokHandler {
             let gift = JSON.parse(fs.readFileSync("gifts.json", "utf8")).find(
                 (x) => x.id == data.giftId
             );
+            console.log("Gift : " + gift);
             if (gift == undefined) return; // We skip the gift if not found
             if (gift.run_effect != "") {
                 let effects = JSON.parse(this.effectDataBase)["Function"];
