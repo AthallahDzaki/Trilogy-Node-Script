@@ -486,7 +486,6 @@ class TikTokHandler {
                 if (wsData.event == "chat") {
                     this.onMessage(wsData.data);
                 } else if (wsData.event == "gift") {
-                    console.log(wsData.data);
                     this.onGift(wsData.data);
                 } else if (donationPlatform.some(platform => wsData.event.includes(platform))) {
                     this.onDonation(wsData.data);
