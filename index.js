@@ -234,6 +234,7 @@ async function StartServer() {
 	if(!GeneralConfig.Tiktok.TikfinityHTTPServer)
             TiktokHandler = new TikTok(wsServer, effectDataBase, rapidFireHandler, userSeed, rngInstance);
     }
+    if(!GeneralConfig.Tiktok.TikfinityHTTPServer) // Remove this interval when use HTTPServer
     setInterval(async () => {
         if(GeneralConfig.Tiktok.TiktokEnable && !GeneralConfig.Tiktok.TiktokUseBuiltInChaos) { // If Tiktok is enabled and not using built-in chaos
             TiktokHandler.HandleTheTimer();
