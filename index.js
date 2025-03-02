@@ -231,7 +231,7 @@ async function StartServer() {
         }
         if(GeneralConfig.RapidFire.RapidFireEnable && GeneralConfig.Tiktok.TiktokVoteEnable)
             rapidFireHandler = new RapidFire(wsServer, effectDataBase, userSeed, rngInstance);
-	if(!GeneralConfiig.Tiktok.TikfinityHTTPServer)
+	if(!GeneralConfig.Tiktok.TikfinityHTTPServer)
             TiktokHandler = new TikTok(wsServer, effectDataBase, rapidFireHandler, userSeed, rngInstance);
     }
     setInterval(async () => {
