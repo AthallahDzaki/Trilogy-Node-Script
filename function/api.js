@@ -150,6 +150,8 @@ export class APIHandler {
                 console.log("[API] Executing Action: ", req.body);
 
                 let effects = JSON.parse(this.effectDataBase)["Function"];
+                console.log("ED : ", this.effectDataBase);
+                console.log("Parsing : ", effects);
                 let effect = effects.find(
                     (x) =>
                         x.id.toLowerCase() == 
