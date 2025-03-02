@@ -114,6 +114,9 @@ async function StartServer() {
     let remaining = cooldown;
 
     ValidateConfig(GeneralConfig);
+    if(GeneralConfig.Tiktok.TiktokEnable)
+        if(GeneralConfig.Tiktok.TikfinityHTTPServer)
+            new API(effectDataBase, wsServer, userSeed, rngInstance);
 
     let loading = ora("Waiting GTA SA to Start"),
         loadingDone = false;
@@ -226,14 +229,11 @@ async function StartServer() {
             console.log("Tiktok Force Effect and Tikfinity HTTP Server cannot be enabled at the same time!");
             exit();
         }
-        if(GeneralConfig.Tiktok.TikfinityHTTPServer)
-            new API(effectDataBase, wsServer, userSeed, rngInstance);
         if(GeneralConfig.RapidFire.RapidFireEnable && GeneralConfig.Tiktok.TiktokVoteEnable)
             rapidFireHandler = new RapidFire(wsServer, effectDataBase, userSeed, rngInstance);
 	if(!GeneralConfiig.Tiktok.TikfinityHTTPServer)
             TiktokHandler = new TikTok(wsServer, effectDataBase, rapidFireHandler, userSeed, rngInstance);
     }
-
     setInterval(async () => {
         if(GeneralConfig.Tiktok.TiktokEnable && !GeneralConfig.Tiktok.TiktokUseBuiltInChaos) { // If Tiktok is enabled and not using built-in chaos
             TiktokHandler.HandleTheTimer();
