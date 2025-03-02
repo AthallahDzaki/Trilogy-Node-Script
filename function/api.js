@@ -152,7 +152,8 @@ export class APIHandler {
                 let effects = JSON.parse(this.effectDataBase)["Function"];
                 let effect = effects.find(
                     (x) =>
-                        x.id.toLowerCase() == req.body.actionId.toLowerCase() &&
+                        x.id.toLowerCase() == 
+                            req.body.actionId.toLowerCase() &&
                         x.category.toLowerCase() ==
                             req.body.categoryId.toLowerCase()
                 );
