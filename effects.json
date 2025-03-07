@@ -1870,6 +1870,13 @@
         },
         {
             "category": "CustomEffects_Player",
+            "name": "Spawn Fire Around Player",
+            "description": "SpawnFireAroundPlayer",
+            "id": "spawn_fire_around_player",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Player",
             "name": "-Health, -Armor, -$250k",
             "description": "INeedSomeHindrance",
             "id": "anti_health_armor_money",
