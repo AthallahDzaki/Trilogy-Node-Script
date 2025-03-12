@@ -393,6 +393,13 @@
             "exclusive": false
         },
         {
+            "category": "Stats",
+            "name": "Buff Player",
+            "description": "BigBro",
+            "id": "buff_player",
+            "exclusive": false
+        },
+        {
             "category": "WantedLevel",
             "name": "+2 Wanted Stars",
             "description": "TurnUpTheHeat",
@@ -1668,6 +1675,13 @@
         },
         {
             "category": "CustomEffects_Objects",
+            "name": "Oh No... This Object make my head dizzy",
+            "description": "CrazyScale",
+            "id": "crazy_scale",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Objects",
             "name": "Super Wide Objects",
             "description": "ObjectsAreSuperWide",
             "id": "object_size_super_wide",
@@ -1874,6 +1888,13 @@
             "category": "CustomVehicle",
             "id": "-1",
             "name": "RandomVehicleAllAround"
+        },
+        {
+            "category": "CustomEffects_Player",
+            "name": "My Head Gonna Explode",
+            "description": "ExplodeHead",
+            "id": "pop_head",
+            "exclusive": false
         },
         {
             "category": "CustomEffects_Player",

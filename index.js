@@ -43,7 +43,7 @@ import { API } from "./function/api.js";
 
 let wsServer = new WebSocketServer({ port: GeneralConfig.General.GUIWebsocketPort || 42069 });
 
-let g_sVersion = "SA CHAOS V1.6.1e";
+let g_sVersion = "SA CHAOS V1.6.2a";
 let g_Version = -1;
 let g_VersionString = "";
 
