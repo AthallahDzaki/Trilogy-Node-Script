@@ -1178,6 +1178,13 @@
             "exclusive" : false
         },
         {
+            "category" : "CustomEffects_Generic",
+            "name" : "ZNine, The f*ck, who is that?",
+            "description" : "ZNineNiBoss",
+            "id" : "texture_znine",
+            "exclusive" : false
+        },
+        {
             "category": "CustomEffects_Generic",
             "name": "Upside-Down Screen",
             "description": "WhatsUpIsDown",
