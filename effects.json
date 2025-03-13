@@ -1186,7 +1186,7 @@
         },
         {
             "category" : "CustomEffects_Generic",
-            "name" : "ZNine, The f*ck, who is that?",
+            "name" : "ZNine, The f.ck, who is that?",
             "description" : "ZNineNiBoss",
             "id" : "texture_znine",
             "exclusive" : false
@@ -2405,6 +2405,13 @@
             "name": "You've been struck by...",
             "description": "YouveBeenStruckBy",
             "id": "struck_by_truck",
+            "exclusive": false
+        },
+        {
+            "category": "CustomEffects_Player",
+            "name": "You've been struck by... golf",
+            "description": "YouveBeenStruckByCaddy",
+            "id": "struck_by_caddy",
             "exclusive": false
         },
         {
