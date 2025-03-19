@@ -2,7 +2,7 @@
 
 Kami sangat menghargai dukungan Anda terhadap proyek ini. Demi keberlanjutan pengembangan, proyek ini kini tersedia sebagai **payware** dan hanya dapat diperoleh melalui **modder/kreator mod**.  
 
-### Keuntungan Dari Saya:  
+### Keuntungan Membeli Program ini Dari Saya:  
 ✅ Akses penuh ke fitur terbaru.  
 ✅ Pembaruan dan dukungan resmi.  
 ✅ Mendukung pengembangan berkelanjutan.  
