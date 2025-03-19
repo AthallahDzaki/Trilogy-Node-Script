@@ -2,5 +2,29 @@
 
 call migrate.bat
 
-echo Hy Guys, Terimakasih sudah menggunakan Project saya ini (Trilogy Node Script) untuk Chaos Mod Kalian. Dikarenakan beberapa kendalan dan kurangnya minat serta kurangnya pemasukan, saya memutuskan untuk tidak lagi memaintenance dan merubah project ini menjadi payware, jika kalian masih memiliki backupnya, silahkan gunakan tetapi semua error tidak lagi menjadi tanggung jawab saya. - Regard Athallah Dzaki
+echo ===================================================
+echo   Terima Kasih Telah Menggunakan Project Ini!
+echo ===================================================
+echo.
+echo Kami sangat menghargai dukungan Anda terhadap proyek ini.
+echo Demi keberlanjutan pengembangan, proyek ini kini tersedia
+echo sebagai PAYWARE dan hanya dapat diperoleh melalui
+echo MODDER/KREATOR MOD.
+echo.
+echo -----------------------------------------------
+echo   Keuntungan Membeli Program ini Dari Saya:
+echo -----------------------------------------------
+echo  ✅ Akses penuh ke fitur terbaru.
+echo  ✅ Pembaruan dan dukungan resmi.
+echo  ✅ Mendukung pengembangan berkelanjutan.
+echo.
+echo Untuk informasi lebih lanjut mengenai harga dan
+echo cara mendapatkan lisensi, silakan hubungi discord:
+echo   .angga.
+echo.
+echo ===================================================
+echo     Terima kasih atas pengertiannya!
+echo ===================================================
+pause
+
 pause
